@@ -1,0 +1,4 @@
+C:\Users\pivov\.CLion2016.3\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug

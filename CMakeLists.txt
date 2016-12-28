@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.6)
+project(UPS_Scrabble_server)
+
+set(CMAKE_CXX_STANDARD 11)
+
+set(SOURCE_FILES main.cpp Network.cpp stdafx.h Network.h Game.cpp Game.h Player.cpp Player.h App.cpp App.h)
+add_executable(UPS_Scrabble_server ${SOURCE_FILES})
