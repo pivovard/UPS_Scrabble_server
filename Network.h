@@ -9,7 +9,7 @@
 
 #include "Player.h"
 
-#define PORT 1996
+#define PORT 1993
 
 class Network
 {
