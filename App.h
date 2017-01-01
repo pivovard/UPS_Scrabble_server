@@ -17,16 +17,11 @@ class App
 public:
     App();
 
-    static Player* PlayerConnect(char *nick, char *ip, int socket);
-    static void Command();
+
 
 private:
-    static int game_count;
-    static int player_count;
-    static list<Game> GameList;
-    static list<Player> PlayerList;
 
-    Network *network;
+    static void Command();
 
 };
 

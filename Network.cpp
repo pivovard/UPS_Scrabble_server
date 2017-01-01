@@ -3,7 +3,6 @@
 //
 
 #include "Network.h"
-#include "App.h"
 
 
 int Network::socket_desc , Network::client_sock , Network::c;
@@ -60,7 +59,7 @@ void Network::Listen()
 
         char *ip = inet_ntoa(client.sin_addr);
 
-        Player *pl = App::PlayerConnect(nick, ip, client_sock);
+        Player *pl = GameManager::PlayerConnect(nick, ip, client_sock);
 
         std::thread thread_pl(Network::PlayerListen, pl);
         thread_pl.detach();
@@ -72,18 +71,11 @@ void Network::Listen()
     }
 }
 
-void Network::Exit()
-{
-    cout << "Socket closed" << endl;
-    close(socket_desc);
-}
-
-
 void Network::PlayerListen(Player *pl)
 {
     int size;
 
-    cout << pl->nick << endl << pl->ip << endl;
+    cout << "Listenning player: " << pl->nick << endl << pl->ip << endl;
     while( (size = recv(pl->socket , pl->message_in , msg_length , 0)) > 0){
         //react on message
         write(pl->socket , pl->message_in , msg_length);
@@ -101,7 +93,11 @@ void Network::PlayerListen(Player *pl)
     }
 }
 
-
+void Network::Exit()
+{
+    cout << "Socket closed" << endl;
+    close(socket_desc);
+}
 
 
 

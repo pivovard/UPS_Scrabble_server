@@ -177,6 +177,33 @@ Game.cpp.s:
 	$(MAKE) -f CMakeFiles/UPS_Scrabble_server.dir/build.make CMakeFiles/UPS_Scrabble_server.dir/Game.cpp.s
 .PHONY : Game.cpp.s
 
+GameManager.o: GameManager.cpp.o
+
+.PHONY : GameManager.o
+
+# target to build an object file
+GameManager.cpp.o:
+	$(MAKE) -f CMakeFiles/UPS_Scrabble_server.dir/build.make CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o
+.PHONY : GameManager.cpp.o
+
+GameManager.i: GameManager.cpp.i
+
+.PHONY : GameManager.i
+
+# target to preprocess a source file
+GameManager.cpp.i:
+	$(MAKE) -f CMakeFiles/UPS_Scrabble_server.dir/build.make CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.i
+.PHONY : GameManager.cpp.i
+
+GameManager.s: GameManager.cpp.s
+
+.PHONY : GameManager.s
+
+# target to generate assembly for a file
+GameManager.cpp.s:
+	$(MAKE) -f CMakeFiles/UPS_Scrabble_server.dir/build.make CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.s
+.PHONY : GameManager.cpp.s
+
 Network.o: Network.cpp.o
 
 .PHONY : Network.o
@@ -273,6 +300,9 @@ help:
 	@echo "... Game.o"
 	@echo "... Game.i"
 	@echo "... Game.s"
+	@echo "... GameManager.o"
+	@echo "... GameManager.i"
+	@echo "... GameManager.s"
 	@echo "... Network.o"
 	@echo "... Network.i"
 	@echo "... Network.s"

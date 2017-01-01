@@ -8,6 +8,7 @@
 #include "stdafx.h"
 
 #include "Player.h"
+#include "GameManager.h"
 
 #define PORT 1993
 
@@ -20,11 +21,11 @@ public:
     static void Listen();
     static void Exit();
 
-    static void PlayerListen(Player *pl);
-
 private:
     static int socket_desc , client_sock , c;
     static struct sockaddr_in server , client;
+
+    static void PlayerListen(Player *pl);
 
     void SendMessage(int socket, string *message);
     void RecvMessage(int socket, string *message);

@@ -92,6 +92,12 @@
 		<Unit filename="/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/Game.h">
 			<Option target="UPS_Scrabble_server"/>
 		</Unit>
+		<Unit filename="/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/GameManager.cpp">
+			<Option target="UPS_Scrabble_server"/>
+		</Unit>
+		<Unit filename="/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/GameManager.h">
+			<Option target="UPS_Scrabble_server"/>
+		</Unit>
 		<Unit filename="/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/Network.cpp">
 			<Option target="UPS_Scrabble_server"/>
 		</Unit>

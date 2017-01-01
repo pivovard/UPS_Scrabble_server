@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/UPS_Scrabble_server.dir/Game.cpp.o"
   "CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o"
   "CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o"
+  "CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o"
   "UPS_Scrabble_server.pdb"
   "UPS_Scrabble_server.exe"
   "libUPS_Scrabble_server.dll.a"

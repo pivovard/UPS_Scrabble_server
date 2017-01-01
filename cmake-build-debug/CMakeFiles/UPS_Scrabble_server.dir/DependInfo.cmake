@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/App.cpp" "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o"
   "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/Game.cpp" "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/Game.cpp.o"
+  "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/GameManager.cpp" "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o"
   "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/Network.cpp" "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o"
   "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/Player.cpp" "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o"
   "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/main.cpp" "/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o"
