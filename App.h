@@ -15,9 +15,8 @@ class App
 {
 
 public:
+
     App();
-
-
 
 private:
 

@@ -8,7 +8,6 @@
 int Network::socket_desc , Network::client_sock , Network::c;
 struct sockaddr_in Network::server , Network::client;
 
-//constructor
 void Network::Start()
 {
     //Create socket
@@ -45,14 +44,13 @@ void Network::Start()
     puts("Server ready!");
 }
 
-//public methods
 
 void Network::Listen()
 {
     c = sizeof(struct sockaddr_in);
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
-        puts("Connection accepted");
+        puts("Connection accepted.");
 
         char *nick = (char *)malloc(64);
         recv(client_sock, nick, 64, 0);
@@ -75,10 +73,11 @@ void Network::PlayerListen(Player *pl)
 {
     int size;
 
-    cout << "Listenning player: " << pl->nick << endl << pl->ip << endl;
+    cout << "Listenning player: " << pl->nick << "   " << pl->ip << endl;
     while( (size = recv(pl->socket , pl->message_in , msg_length , 0)) > 0){
         //react on message
-        write(pl->socket , pl->message_in , msg_length);
+        cout << "Recv from " << pl->nick << ": " << pl->message_in << endl;
+        //write(pl->socket , pl->message_in , msg_length);
     }
 
     if(size == 0)
@@ -93,6 +92,11 @@ void Network::PlayerListen(Player *pl)
     }
 }
 
+void Network::SendToPlayer(Player *pl)
+{
+    write(pl->socket , pl->message_out , msg_length);
+}
+
 void Network::Exit()
 {
     cout << "Socket closed" << endl;
@@ -103,7 +107,7 @@ void Network::Exit()
 
 
 
-//private methods
+
 
 void Network::SendMessage(int socket, string *message)
 {

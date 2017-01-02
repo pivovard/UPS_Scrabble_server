@@ -16,8 +16,6 @@ class GameManager
 
 public:
 
-    static void Start2Game();
-
     static Player* PlayerConnect(char *nick, char *ip, int socket);
 
 private:
@@ -25,6 +23,8 @@ private:
     static int player_count;
     static vector<Game> GameList;
     static vector<Player> PlayerList;
+
+    static void Start2Game();
 
     static void Run2Game();
 };

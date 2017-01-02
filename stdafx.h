@@ -26,6 +26,7 @@
 
 
 using namespace std;
+
 #define null ( (void *) 0)
 #define msg_length 1024
 

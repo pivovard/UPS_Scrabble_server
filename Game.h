@@ -6,7 +6,9 @@
 #define UPS_SCRABBLE_SERVER_GAME_H
 
 #include "stdafx.h"
+
 #include "Player.h"
+#include "Network.h"
 
 class Game
 {
@@ -22,6 +24,10 @@ public:
 
     Game(int id);
     Game(int id, Player *pl1, Player *pl2);
+
+private:
+
+    void NextTurn();
 };
 
 #endif //UPS_SCRABBLE_SERVER_GAME_H

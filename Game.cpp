@@ -32,4 +32,15 @@ Game::Game(int id, Player *pl1, Player *pl2)
             this->matrix[i][j] = '*';
         }
     }
+
+    this->NextTurn();
+}
+
+void Game::NextTurn()
+{
+    Players[PlayerNext].message_out = "TURN#";
+    Network::SendToPlayer(&Players[PlayerNext]);
+
+    PlayerNext++;
+    if(PlayerNext = PlayerCount) PlayerNext = 0;
 }
