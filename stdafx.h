@@ -13,6 +13,7 @@
 //std dlls
 #include <string.h>
 #include <list>
+#include <vector>
 
 //BSD sockets
 #include <sys/socket.h>

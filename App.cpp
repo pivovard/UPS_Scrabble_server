@@ -13,8 +13,8 @@ App::App()
     std::thread thread_listen(Network::Listen);
     thread_listen.detach();
 
-    std::thread thread_gamemanager(GameManager::Start2Game);
-    thread_gamemanager.detach();
+    //std::thread thread_gamemanager(GameManager::Start2Game);
+    //thread_gamemanager.detach();
 
     thread_command.join();
 }

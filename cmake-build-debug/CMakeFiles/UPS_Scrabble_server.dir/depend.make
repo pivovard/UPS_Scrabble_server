@@ -4,6 +4,7 @@
 CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../App.cpp
 CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../App.h
 CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../Game.h
+CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../GameManager.h
 CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../Network.h
 CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../Player.h
 CMakeFiles/UPS_Scrabble_server.dir/App.cpp.o: ../stdafx.h
@@ -13,8 +14,15 @@ CMakeFiles/UPS_Scrabble_server.dir/Game.cpp.o: ../Game.h
 CMakeFiles/UPS_Scrabble_server.dir/Game.cpp.o: ../Player.h
 CMakeFiles/UPS_Scrabble_server.dir/Game.cpp.o: ../stdafx.h
 
-CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../App.h
+CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o: ../Game.h
+CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o: ../GameManager.cpp
+CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o: ../GameManager.h
+CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o: ../Network.h
+CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o: ../Player.h
+CMakeFiles/UPS_Scrabble_server.dir/GameManager.cpp.o: ../stdafx.h
+
 CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../Game.h
+CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../GameManager.h
 CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../Network.cpp
 CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../Network.h
 CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../Player.h
@@ -26,6 +34,7 @@ CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../stdafx.h
 
 CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o: ../App.h
 CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o: ../Game.h
+CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o: ../GameManager.h
 CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o: ../Network.h
 CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o: ../Player.h
 CMakeFiles/UPS_Scrabble_server.dir/main.cpp.o: ../main.cpp

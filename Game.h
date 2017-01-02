@@ -10,16 +10,18 @@
 
 class Game
 {
+
 public:
     int id;
     char matrix[15][15];
 
-    Player *player1;
-    Player *player2;
-    Player *player3;
-    Player *player4;
+    int PlayerCount;
+    int PlayerNext = 0;
+
+    Player Players[];
 
     Game(int id);
+    Game(int id, Player *pl1, Player *pl2);
 };
 
 #endif //UPS_SCRABBLE_SERVER_GAME_H
