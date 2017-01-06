@@ -22,6 +22,8 @@ public:
     char *message_out;
 
     Player(char *nick, char *ip, int socket);
+
+    void SendToPlayer(string msg);
 };
 
 #endif //UPS_SCRABBLE_SERVER_PLAYER_H

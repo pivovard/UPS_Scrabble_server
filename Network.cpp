@@ -15,6 +15,7 @@ void Network::Start()
     if (socket_desc == -1)
     {
         printf("Could not create socket");
+        return;
     }
     puts("Socket created.");
 
@@ -47,13 +48,16 @@ void Network::Start()
 
 void Network::Listen()
 {
+    int size;
+
     c = sizeof(struct sockaddr_in);
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
         puts("Connection accepted.");
 
         char *nick = (char *)malloc(64);
-        recv(client_sock, nick, 64, 0);
+        size = recv(client_sock, nick, 64, 0);
+        //nick = CropChar(nick_in, size);
 
         char *ip = inet_ntoa(client.sin_addr);
 
@@ -72,12 +76,17 @@ void Network::Listen()
 void Network::PlayerListen(Player *pl)
 {
     int size;
+    string msg;
 
     cout << "Listenning player: " << pl->nick << "   " << pl->ip << endl;
     while( (size = recv(pl->socket , pl->message_in , msg_length , 0)) > 0){
         //react on message
-        cout << "Recv from " << pl->nick << ": " << pl->message_in << endl;
-        //write(pl->socket , pl->message_in , msg_length);
+        //cout << "Recv from " << pl->nick << ": " << pl->message_in << endl;
+
+        msg = CropMsg(pl->message_in, size);
+        cout << "Recv from " << pl->nick << ": " << msg << endl;
+
+        pl->SendToPlayer(msg);
     }
 
     if(size == 0)
@@ -92,18 +101,38 @@ void Network::PlayerListen(Player *pl)
     }
 }
 
-void Network::SendToPlayer(Player *pl)
-{
-    write(pl->socket , pl->message_out , msg_length);
-}
-
 void Network::Exit()
 {
-    cout << "Socket closed" << endl;
+    cout << "Socket closed." << endl;
     close(socket_desc);
 }
 
 
+
+
+string Network::CropMsg(char *in, int size)
+{
+    string msg = "";
+
+    for(int i = 0; i < size; i++){
+        msg += in[i];
+    }
+
+    return msg;
+}
+
+//nefunguje, je treba spravit
+char* Network::CropChar(char *in, int size)
+{
+    char *out = (char *) malloc(size);
+
+    strncpy(out, in, size);
+    /*for(int i = 0; i < size; i++){
+        out[i] = in[i];
+    }*/
+
+    return out;
+}
 
 
 

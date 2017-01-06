@@ -33,13 +33,17 @@ Game::Game(int id, Player *pl1, Player *pl2)
         }
     }
 
+    Players[0].SendToPlayer("GAME:" + string(Players[1].nick));
+    Players[1].SendToPlayer("GAME:" + string(Players[0].nick));
+
     this->NextTurn();
 }
 
 void Game::NextTurn()
 {
-    Players[PlayerNext].message_out = "TURN#";
-    Network::SendToPlayer(&Players[PlayerNext]);
+    //Players[PlayerNext].message_out = "TURN#";
+    //Network::SendToPlayer(&Players[PlayerNext]);
+    Players[PlayerNext].SendToPlayer("TURN");
 
     PlayerNext++;
     if(PlayerNext = PlayerCount) PlayerNext = 0;

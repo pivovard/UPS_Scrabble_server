@@ -8,8 +8,7 @@
 #include "stdafx.h"
 
 #include "Network.h"
-#include "Game.h"
-#include "Player.h"
+
 
 class App
 {
