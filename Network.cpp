@@ -11,7 +11,7 @@ struct sockaddr_in Network::server , Network::client;
 void Network::Start()
 {
     //Create socket
-    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+    socket_desc = socket(AF_INET , SOCK_STREAM , IPPROTO_TCP);
     if (socket_desc == -1)
     {
         printf("Could not create socket");
@@ -55,9 +55,8 @@ void Network::Listen()
     {
         puts("Connection accepted.");
 
-        char *nick = (char *)malloc(64);
+        char *nick = new char[64];
         size = recv(client_sock, nick, 64, 0);
-        //nick = CropChar(nick_in, size);
 
         char *ip = inet_ntoa(client.sin_addr);
 
@@ -124,7 +123,7 @@ string Network::CropMsg(char *in, int size)
 //nefunguje, je treba spravit
 char* Network::CropChar(char *in, int size)
 {
-    char *out = (char *) malloc(size);
+    char *out = new char[size];
 
     strncpy(out, in, size);
     /*for(int i = 0; i < size; i++){
