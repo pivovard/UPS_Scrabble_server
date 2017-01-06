@@ -49,14 +49,15 @@ void Network::Start()
 void Network::Listen()
 {
     int size;
+    char *nick_in = new char[64];
 
     c = sizeof(struct sockaddr_in);
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
         puts("Connection accepted.");
 
-        char *nick = new char[64];
-        size = recv(client_sock, nick, 64, 0);
+        size = recv(client_sock, nick_in, 64, 0);
+        char *nick = CropChar(nick_in, size);
 
         char *ip = inet_ntoa(client.sin_addr);
 
@@ -125,10 +126,10 @@ char* Network::CropChar(char *in, int size)
 {
     char *out = new char[size];
 
-    strncpy(out, in, size);
-    /*for(int i = 0; i < size; i++){
+    for(int i = 0; i < size; i++){
+        if(in[i] == '\n') break;
         out[i] = in[i];
-    }*/
+    }
 
     return out;
 }
