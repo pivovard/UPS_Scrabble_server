@@ -27,7 +27,7 @@
 
 using namespace std;
 
-#define null ( (void *) 0)
+#define nullptr ( (void *) 0)
 #define msg_length 1024
 
 #endif //UPS_SCRABBLE_SERVER_STDAFX_H
