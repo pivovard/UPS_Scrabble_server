@@ -18,9 +18,10 @@ public:
     char matrix[15][15];
 
     int PlayerCount;
-    int PlayerNext = 0;
+    int PlayerNext;
 
-    Player Players[];
+    //pole 2...pri rozsireni na 4
+    Player *Players[2];
 
     Game(int id);
     Game(int id, Player *pl1, Player *pl2);

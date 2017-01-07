@@ -21,8 +21,8 @@ public:
 private:
     static int game_count;
     static int player_count;
-    static vector<Game> GameList;
-    static vector<Player> PlayerList;
+    static vector<Game*> GameList;
+    static vector<Player*> PlayerList;
 
     static void Start2Game();
 
