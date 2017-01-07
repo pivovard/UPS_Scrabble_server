@@ -593,3 +593,45 @@ make[1]: Leaving directory '/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_s
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make.exe" "cmTC_d04d2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d04d2.dir/build.make CMakeFiles/cmTC_d04d2.dir/build
+make[1]: Entering directory '/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d04d2.dir/CheckIncludeFile.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_d04d2.dir/CheckIncludeFile.c.o   -c /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_d04d2.exe
+/cygdrive/c/Users/pivov/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -E cmake_link_script CMakeFiles/cmTC_d04d2.dir/link.txt --verbose=1
+/usr/bin/cc     -Wl,--enable-auto-import  CMakeFiles/cmTC_d04d2.dir/CheckIncludeFile.c.o  -o cmTC_d04d2.exe -Wl,--out-implib,libcmTC_d04d2.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+make[1]: Leaving directory '/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+Determining if the pthread_create exist passed with the following output:
+Change Dir: /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make.exe" "cmTC_9d72a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9d72a.dir/build.make CMakeFiles/cmTC_9d72a.dir/build
+make[1]: Entering directory '/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9d72a.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9d72a.dir/CheckSymbolExists.c.o   -c /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_9d72a.exe
+/cygdrive/c/Users/pivov/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -E cmake_link_script CMakeFiles/cmTC_9d72a.dir/link.txt --verbose=1
+/usr/bin/cc     -Wl,--enable-auto-import  CMakeFiles/cmTC_9d72a.dir/CheckSymbolExists.c.o  -o cmTC_9d72a.exe -Wl,--out-implib,libcmTC_9d72a.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+make[1]: Leaving directory '/cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+File /cygdrive/c/Users/pivov/ClionProjects/UPS_Scrabble_server/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
