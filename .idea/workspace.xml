@@ -12,16 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc3515c8-87dd-43bf-a50a-431cd35f3677" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/UPS_Scrabble_server.exe" afterPath="$PROJECT_DIR$/cmake-build-debug/UPS_Scrabble_server.exe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.cpp" afterPath="$PROJECT_DIR$/Game.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.h" afterPath="$PROJECT_DIR$/Game.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameManager.cpp" afterPath="$PROJECT_DIR$/GameManager.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameManager.h" afterPath="$PROJECT_DIR$/GameManager.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Network.cpp" afterPath="$PROJECT_DIR$/Network.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Network.h" afterPath="$PROJECT_DIR$/Network.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.cpp" afterPath="$PROJECT_DIR$/Player.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.h" afterPath="$PROJECT_DIR$/Player.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -107,8 +99,8 @@
       <file leaf-file-name="Game.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Game.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -417,7 +409,7 @@
       <workItem from="1482957888902" duration="171000" />
       <workItem from="1482958229341" duration="1710000" />
       <workItem from="1483026405224" duration="13119000" />
-      <workItem from="1483552438469" duration="45384000" />
+      <workItem from="1483552438469" duration="47997000" />
     </task>
     <task id="LOCAL-00001" summary="Port 1993">
       <created>1482960125088</created>
@@ -496,11 +488,18 @@
       <option name="project" value="LOCAL" />
       <updated>1483807556879</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Prijmuti zpravy o tahu;&#10;ulozeni tahu;&#10;preposlani tahu ostatnim hracum;">
+      <created>1483962590811</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1483962590811</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91700000" />
+    <option name="totallyTimeSpent" value="94313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1936" height="1056" extended-state="0" />
@@ -544,7 +543,8 @@
     <MESSAGE value="CMakeList link pthread" />
     <MESSAGE value="memoryleak - try repair" />
     <MESSAGE value="oprava memoryleaku&#10;pointery na GameList a PlayerList&#10;prirazovani referenci" />
-    <option name="LAST_COMMIT_MESSAGE" value="oprava memoryleaku&#10;pointery na GameList a PlayerList&#10;prirazovani referenci" />
+    <MESSAGE value="Prijmuti zpravy o tahu;&#10;ulozeni tahu;&#10;preposlani tahu ostatnim hracum;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prijmuti zpravy o tahu;&#10;ulozeni tahu;&#10;preposlani tahu ostatnim hracum;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -960,16 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Game.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-          <folding>
-            <element signature="e#112#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GameManager.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1004,10 +994,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Game.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+          <folding>
+            <element signature="e#112#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Game.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding />
         </state>
       </provider>

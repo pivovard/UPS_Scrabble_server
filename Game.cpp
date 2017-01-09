@@ -10,7 +10,7 @@ Game::Game(int id)
 
     for(int i = 0; i < 15; i++){
         for(int j = 0; j < 15; j++){
-            this->matrix[i][j] = '*';
+            this->matrix[i][j] = '\0';
         }
     }
 
@@ -32,7 +32,7 @@ Game::Game(int id, Player *pl1, Player *pl2)
 
     for(int i = 0; i < 15; i++){
         for(int j = 0; j < 15; j++){
-            this->matrix[i][j] = '*';
+            this->matrix[i][j] = '\0';
         }
     }
 
