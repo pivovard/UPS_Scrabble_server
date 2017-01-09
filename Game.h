@@ -26,9 +26,12 @@ public:
     Game(int id);
     Game(int id, Player *pl1, Player *pl2);
 
+    void RecvTurn(string msg);
+
 private:
 
     void NextTurn();
+    void SendTurn(string msg);
 };
 
 #endif //UPS_SCRABBLE_SERVER_GAME_H

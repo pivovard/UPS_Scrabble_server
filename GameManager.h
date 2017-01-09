@@ -18,6 +18,8 @@ public:
 
     static Player* PlayerConnect(char *nick, char *ip, int socket);
 
+    static void ResolveTurn(string msg);
+
 private:
     static int game_count;
     static int player_count;
@@ -25,8 +27,6 @@ private:
     static vector<Player*> PlayerList;
 
     static void Start2Game();
-
-    static void Run2Game();
 };
 
 #endif //UPS_SCRABBLE_SERVER_GAMEMANAGER_H

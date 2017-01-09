@@ -48,7 +48,7 @@ void Network::Start()
 
 void Network::Listen()
 {
-    int size;
+    ssize_t size;
     char *nick_in = new char[64];
 
     c = sizeof(struct sockaddr_in);
@@ -75,18 +75,22 @@ void Network::Listen()
 
 void Network::PlayerListen(Player *pl)
 {
-    int size;
+    ssize_t size;
     string msg;
 
     cout << "Listenning player: " << pl->nick << "   " << pl->ip << endl;
     while( (size = recv(pl->socket , pl->message_in , msg_length , 0)) > 0){
         //react on message
         //cout << "Recv from " << pl->nick << ": " << pl->message_in << endl;
+        //msg = CropMsg(pl->message_in, size);
 
-        msg = CropMsg(pl->message_in, size);
+        msg = string(pl->message_in);
+        int i = msg.find('\n');
+        if (i!=std::string::npos) msg = msg.substr(0, i);
+
         cout << "Recv from " << pl->nick << ": " << msg << endl;
 
-        pl->SendToPlayer(msg);
+        Resolve(msg);
     }
 
     if(size == 0)
@@ -101,6 +105,19 @@ void Network::PlayerListen(Player *pl)
     }
 }
 
+void Network::Resolve(string msg)
+{
+    size_t i = msg.find(':', 0);
+
+    string type = msg.substr(0, i);
+    msg = msg.substr(i + 1);
+
+    if(strcmp(type.c_str(), "TURN") == 0){
+        GameManager::ResolveTurn(msg);
+
+    }
+}
+
 void Network::Exit()
 {
     cout << "Socket closed." << endl;
@@ -110,7 +127,10 @@ void Network::Exit()
 
 
 
-string Network::CropMsg(char *in, int size)
+
+
+
+string Network::CropMsg(char *in, ssize_t size)
 {
     string msg = "";
 
@@ -122,7 +142,7 @@ string Network::CropMsg(char *in, int size)
 }
 
 //nefunguje, je treba spravit
-char* Network::CropChar(char *in, int size)
+char* Network::CropChar(char *in, ssize_t size)
 {
     char *out = new char[size];
 

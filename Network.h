@@ -30,8 +30,10 @@ private:
 
     static void PlayerListen(Player *pl);
 
-    static string CropMsg(char *in, int size);
-    static char* CropChar(char *in, int size);
+    static void Resolve(string msg);
+
+    static string CropMsg(char *in, ssize_t size);
+    static char* CropChar(char *in, ssize_t size);
 
     void SendMessage(int socket, string *message);
     void RecvMessage(int socket, string *message);
