@@ -21,14 +21,19 @@ public:
     int PlayerNext;
 
     //pole 2...pri rozsireni na 4
-    Player *Players[2];
+    //Player *Players[2];
+    vector<Player*> Players;
 
     Game(int id);
     Game(int id, Player *pl1, Player *pl2);
+    Game(int id, Player *pl1, Player *pl2, Player *pl3);
+    Game(int id, Player *pl1, Player *pl2, Player *pl3, Player *pl4);
 
     void RecvTurn(string msg);
 
 private:
+
+    void Init();
 
     void NextTurn();
     void SendTurn(string msg);

@@ -11,7 +11,7 @@ class Player
 {
 public:
     int id;
-    char *nick;
+    string nick;
     char *ip;
     int socket;
 
@@ -22,7 +22,7 @@ public:
     char *message_in;
     char *message_out;
 
-    Player(char *nick, char *ip, int socket, int id);
+    Player(string nick, char *ip, int socket, int id);
 
     void SendToPlayer(string msg);
 };

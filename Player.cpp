@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-Player::Player(char *nick, char *ip, int socket, int id)
+Player::Player(string nick, char *ip, int socket, int id)
 {
     this->nick = nick;
     this->ip = ip;

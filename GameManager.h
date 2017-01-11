@@ -16,17 +16,24 @@ class GameManager
 
 public:
 
-    static Player* PlayerConnect(char *nick, char *ip, int socket);
+    static Player* PlayerConnect(string nick, char *ip, int socket, int no);
 
     static void ResolveTurn(string msg);
 
 private:
     static int game_count;
-    static int player_count;
+    static int player_count2;
+    static int player_count3;
+    static int player_count4;
+
     static vector<Game*> GameList;
-    static vector<Player*> PlayerList;
+    static vector<Player*> PlayerList2;
+    static vector<Player*> PlayerList3;
+    static vector<Player*> PlayerList4;
 
     static void Start2Game();
+    static void Start3Game();
+    static void Start4Game();
 };
 
 #endif //UPS_SCRABBLE_SERVER_GAMEMANAGER_H

@@ -23,13 +23,41 @@ Game::Game(int id, Player *pl1, Player *pl2)
     this->PlayerCount = 2;
     this->PlayerNext = 0;
 
+    this->Players.push_back(pl1);
+    this->Players.push_back(pl2);
 
-    this->Players[0] = pl1;
-    Players[0]->GameID = id;
+    this->Init();
+}
 
-    this->Players[1] = pl2;
-    Players[1]->GameID = id;
+Game::Game(int id, Player *pl1, Player *pl2, Player *pl3)
+{
+    this->id = id;
+    this->PlayerCount = 3;
+    this->PlayerNext = 0;
 
+    this->Players.push_back(pl1);
+    this->Players.push_back(pl2);
+    this->Players.push_back(pl3);
+
+    this->Init();
+}
+
+Game::Game(int id, Player *pl1, Player *pl2, Player *pl3, Player *pl4)
+{
+    this->id = id;
+    this->PlayerCount = 4;
+    this->PlayerNext = 0;
+
+    this->Players.push_back(pl1);
+    this->Players.push_back(pl2);
+    this->Players.push_back(pl3);
+    this->Players.push_back(pl4);
+
+    this->Init();
+}
+
+void Game::Init()
+{
     for(int i = 0; i < 15; i++){
         for(int j = 0; j < 15; j++){
             this->matrix[i][j] = '\0';
@@ -38,9 +66,11 @@ Game::Game(int id, Player *pl1, Player *pl2)
 
     string msg = "GAME:" + to_string(id) + ":";
     for(int i = 0; i < PlayerCount; i++){
+        Players[i]->GameID = id;
+
         msg += to_string(Players[i]->id);
         msg += ",";
-        msg += string(Players[i]->nick);
+        msg += Players[i]->nick;
         msg += ";";
     }
     msg = msg.substr(0, msg.length() - 1);
@@ -54,6 +84,9 @@ Game::Game(int id, Player *pl1, Player *pl2)
 
     this->NextTurn();
 }
+
+
+
 
 void Game::NextTurn()
 {

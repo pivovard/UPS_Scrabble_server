@@ -50,6 +50,7 @@ void Network::Listen()
 {
     ssize_t size;
     char *nick_in = new char[64];
+    int i;
 
     c = sizeof(struct sockaddr_in);
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
@@ -57,11 +58,19 @@ void Network::Listen()
         puts("Connection accepted.");
 
         size = recv(client_sock, nick_in, 64, 0);
-        char *nick = CropChar(nick_in, size);
+        //char *nick = CropChar(nick_in, size);
+        string nick = string(nick_in);
+
+        i = nick.find('\n');
+        nick = nick.substr(0, i);
+
+        i = nick.find(';');
+        int no = stoi(nick.substr(i+1));
+        nick = nick.substr(0, i);
 
         char *ip = inet_ntoa(client.sin_addr);
 
-        Player *pl = GameManager::PlayerConnect(nick, ip, client_sock);
+        Player *pl = GameManager::PlayerConnect(nick, ip, client_sock, no);
 
         std::thread thread_pl(Network::PlayerListen, pl);
         thread_pl.detach();
@@ -153,10 +162,6 @@ char* Network::CropChar(char *in, ssize_t size)
 
     return out;
 }
-
-
-
-
 
 void Network::SendMessage(int socket, string *message)
 {

@@ -5,27 +5,72 @@
 #include "GameManager.h"
 
 int GameManager::game_count = 0;
-int GameManager::player_count = 0;
+int GameManager::player_count2 = 0;
+int GameManager::player_count3 = 0;
+int GameManager::player_count4 = 0;
+
 vector<Game*> GameManager::GameList;
-vector<Player*> GameManager::PlayerList;
+vector<Player*> GameManager::PlayerList2;
+vector<Player*> GameManager::PlayerList3;
+vector<Player*> GameManager::PlayerList4;
 
 
-Player* GameManager::PlayerConnect(char *nick, char *ip, int socket)
+Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int no)
 {
-    Player *pl = new Player(nick, ip, socket, player_count);
-    PlayerList.push_back(pl);
-    player_count++;
+    Player *pl;
+    switch(no){
+        case 2:
+            pl = new Player(nick, ip, socket, player_count2);
+            PlayerList2.push_back(pl);
+            player_count2++;
 
-    if((player_count % 2) == 0){
-        GameManager::Start2Game();
+            if((player_count2 % 2) == 0){
+                GameManager::Start2Game();
+            }
+            break;
+        case 3:
+            pl = new Player(nick, ip, socket, player_count3);
+            PlayerList3.push_back(pl);
+            player_count3++;
+
+            if((player_count3 % 3) == 0){
+                GameManager::Start3Game();
+            }
+            break;
+        case 4:
+            pl = new Player(nick, ip, socket, player_count4);
+            PlayerList4.push_back(pl);
+            player_count4++;
+
+            if((player_count4 % 4) == 0){
+                GameManager::Start4Game();
+            }
+            break;
     }
+
+
+
 
     return pl;
 }
 
 void GameManager::Start2Game()
 {
-    Game *game = new Game(game_count, PlayerList.at(player_count - 2), PlayerList.at(player_count - 1));
+    Game *game = new Game(game_count, PlayerList2.at(player_count2 - 2), PlayerList2.at(player_count2 - 1));
+    GameList.push_back(game);
+    game_count++;
+}
+
+void GameManager::Start3Game()
+{
+    Game *game = new Game(game_count, PlayerList3.at(player_count3 - 3), PlayerList3.at(player_count3 - 2), PlayerList3.at(player_count3 - 1));
+    GameList.push_back(game);
+    game_count++;
+}
+
+void GameManager::Start4Game()
+{
+    Game *game = new Game(game_count, PlayerList4.at(player_count4 - 4), PlayerList4.at(player_count4 - 3), PlayerList4.at(player_count4 - 2), PlayerList4.at(player_count4 - 1));
     GameList.push_back(game);
     game_count++;
 }
