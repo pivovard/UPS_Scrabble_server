@@ -15,10 +15,11 @@ vector<Player*> GameManager::PlayerList3;
 vector<Player*> GameManager::PlayerList4;
 
 
-Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int no)
+Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
 {
     Player *pl;
-    switch(no){
+    switch(n)
+    {
         case 2:
             pl = new Player(nick, ip, socket, player_count2);
             PlayerList2.push_back(pl);
@@ -48,10 +49,31 @@ Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int no)
             break;
     }
 
-
-
-
     return pl;
+}
+
+int GameManager::CheckNick(string nick, int n)
+{
+    switch(n)
+    {
+        case 2:
+            for(int i = 0; i < player_count2; i++){
+                if(nick == PlayerList2[i]->nick) return 1;
+            }
+            break;
+        case 3:
+            for(int i = 0; i < player_count3; i++){
+                if(nick == PlayerList3[i]->nick) return 1;
+            }
+            break;
+        case 4:
+            for(int i = 0; i < player_count4; i++){
+                if(nick == PlayerList4[i]->nick) return 1;
+            }
+            break;
+    }
+
+    return 0;
 }
 
 void GameManager::Start2Game()

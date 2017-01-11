@@ -16,7 +16,8 @@ class GameManager
 
 public:
 
-    static Player* PlayerConnect(string nick, char *ip, int socket, int no);
+    static Player* PlayerConnect(string nick, char *ip, int socket, int n);
+    static int CheckNick(string nick, int n);
 
     static void ResolveTurn(string msg);
 

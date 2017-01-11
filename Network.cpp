@@ -65,12 +65,17 @@ void Network::Listen()
         nick = nick.substr(0, i);
 
         i = nick.find(';');
-        int no = stoi(nick.substr(i+1));
+        int n = stoi(nick.substr(i+1));
         nick = nick.substr(0, i);
+
+        if(GameManager::CheckNick(nick, n) != 0){
+            send(client_sock, "NICK\n", msg_length, 0);
+            continue;
+        }
 
         char *ip = inet_ntoa(client.sin_addr);
 
-        Player *pl = GameManager::PlayerConnect(nick, ip, client_sock, no);
+        Player *pl = GameManager::PlayerConnect(nick, ip, client_sock, n);
 
         std::thread thread_pl(Network::PlayerListen, pl);
         thread_pl.detach();
@@ -123,6 +128,8 @@ void Network::Resolve(string msg)
 
     if(strcmp(type.c_str(), "TURN") == 0){
         GameManager::ResolveTurn(msg);
+    }
+    else if(strcmp(type.c_str(), "END") == 0){
 
     }
 }
