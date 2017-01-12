@@ -68,9 +68,27 @@ void Network::Listen()
         int n = stoi(nick.substr(i+1));
         nick = nick.substr(0, i);
 
-        if(GameManager::CheckNick(nick, n) != 0){
+        int res = GameManager::CheckNick(nick, n);
+        if(res == 2){
             send(client_sock, "NICK\n", msg_length, 0);
             continue;
+        }
+
+        if(res == 1){
+            char *m = new char[msg_length];
+            send(client_sock, "RETURN\n", msg_length, 0);
+            recv(client_sock , m , msg_length , 0);
+            string msg = string(m);
+            i = nick.find('\n');
+            msg = msg.substr(0, i);
+            if(strcmp(msg.c_str(), "RETURN") == 0) {
+                GameManager::PlayerReconnect(nick, n);
+                continue;
+            }
+            else{
+                Player *pl = GameManager::GetPlayer(nick, n);
+                pl->connected++;
+            }
         }
 
         char *ip = inet_ntoa(client.sin_addr);
@@ -104,7 +122,7 @@ void Network::PlayerListen(Player *pl)
 
         cout << "Recv from " << pl->nick << ": " << msg << endl;
 
-        Resolve(msg);
+        Resolve(msg , pl);
     }
 
     if(size == 0)
@@ -117,9 +135,15 @@ void Network::PlayerListen(Player *pl)
         puts("Client disconnected");
         perror("recv failed");
     }
+
+    try {
+        pl->connected ++; //uz muze byt nullptr pokud END
+        GameManager::PlayerDisconnect(pl);
+    }
+    catch(exception e) {};
 }
 
-void Network::Resolve(string msg)
+void Network::Resolve(string msg, Player *pl)
 {
     size_t i = msg.find(':', 0);
 
@@ -129,9 +153,10 @@ void Network::Resolve(string msg)
     if(strcmp(type.c_str(), "TURN") == 0){
         GameManager::ResolveTurn(msg);
     }
-    else if(strcmp(type.c_str(), "END") == 0){
-
-    }
+    /*else if(strcmp(type.c_str(), "END") == 0){
+        pl->connected = 2;
+        GameManager::PlayerDisconnect(pl);
+    }*/
 }
 
 void Network::Exit()

@@ -19,6 +19,7 @@ public:
 
     int PlayerCount;
     int PlayerNext;
+    int PlayerDisconnected;
 
     //pole 2...pri rozsireni na 4
     //Player *Players[2];
@@ -30,6 +31,7 @@ public:
     Game(int id, Player *pl1, Player *pl2, Player *pl3, Player *pl4);
 
     void RecvTurn(string msg);
+    void Reconnect(int id);
 
 private:
 

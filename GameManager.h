@@ -17,9 +17,14 @@ class GameManager
 public:
 
     static Player* PlayerConnect(string nick, char *ip, int socket, int n);
+
     static int CheckNick(string nick, int n);
+    static Player* GetPlayer(string nick, int n);
 
     static void ResolveTurn(string msg);
+
+    static void PlayerReconnect(string nick, int n);
+    static void PlayerDisconnect(Player *pl);
 
 private:
     static int game_count;
@@ -35,6 +40,9 @@ private:
     static void Start2Game();
     static void Start3Game();
     static void Start4Game();
+
+    static void Remove(Player *pl);
+    static void DestroyGame(Game *g);
 };
 
 #endif //UPS_SCRABBLE_SERVER_GAMEMANAGER_H

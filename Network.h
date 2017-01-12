@@ -30,7 +30,7 @@ private:
 
     static void PlayerListen(Player *pl);
 
-    static void Resolve(string msg);
+    static void Resolve(string msg, Player *pl);
 
     static string CropMsg(char *in, ssize_t size);
     static char* CropChar(char *in, ssize_t size);

@@ -15,9 +15,10 @@ public:
     char *ip;
     int socket;
 
-    int GameID;
+    int connected = 0;
+
+    int GameID = -1;
     int score = 0;
-    bool ready = false;
 
     char *message_in;
     char *message_out;

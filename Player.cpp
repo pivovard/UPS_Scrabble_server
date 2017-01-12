@@ -24,5 +24,4 @@ void Player::SendToPlayer(string msg)
         //size = write(this->socket , msg.c_str() , msg_length);
         size = send(this->socket , msg.c_str() , msg_length, 0);
     }
-
 }
