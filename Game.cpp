@@ -170,7 +170,6 @@ void Game::Reconnect(int id)
     for(int i = 0; i < PlayerCount; i ++) {
         if (Players[i]->id == id) {
             Players[i]->SendToPlayer(msg);
-            break;
         }
         else{
             Players[i]->SendToPlayer(msg2);
