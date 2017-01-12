@@ -32,6 +32,7 @@ public:
 
     void RecvTurn(string msg);
     void Reconnect(int id);
+    void Disconnect(int id);
 
 private:
 

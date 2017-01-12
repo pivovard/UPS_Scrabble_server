@@ -127,8 +127,17 @@ void Game::SendTurn(string msg)
 
     for(int i = 0; i < PlayerCount; i ++){
         if(i == PlayerNext) continue;
-        if(Players[i]->connected > 0) continue;
-        Players[i]->SendToPlayer(msg);
+        if(Players[i]->connected == 0) Players[i]->SendToPlayer(msg);
+    }
+}
+
+void Game::Disconnect(int id)
+{
+    this->PlayerDisconnected ++;
+    string msg = "DISC:" + to_string(id) + "\n";
+    for(int i = 0; i < PlayerCount; i ++){
+        if(Players[i]->connected == 0) Players[i]->SendToPlayer(msg);
+        if(Players[i]->id == id) this->NextTurn(); //pokud byl odpojeny hrac na tahu
     }
 }
 
@@ -156,13 +165,18 @@ void Game::Reconnect(int id)
     }
     msg = msg.substr(0, msg.length() - 1);
 
+    string msg2 = "RECN:" + to_string(id) + "\n";
+
     for(int i = 0; i < PlayerCount; i ++) {
         if (Players[i]->id == id) {
             Players[i]->SendToPlayer(msg);
             break;
         }
+        else{
+            Players[i]->SendToPlayer(msg2);
+        }
     }
 
     this->PlayerDisconnected--;
-    this->NextTurn();
+    if(PlayerDisconnected + 2 == PlayerCount) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
 }

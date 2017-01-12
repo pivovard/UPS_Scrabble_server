@@ -137,8 +137,7 @@ void Network::PlayerListen(Player *pl)
     }
 
     try {
-        pl->connected ++; //uz muze byt nullptr pokud END
-        GameManager::PlayerDisconnect(pl);
+        GameManager::PlayerDisconnect(pl); //uz muze byt nullptr pokud END
     }
     catch(exception e) {};
 }

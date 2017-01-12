@@ -157,9 +157,11 @@ void GameManager::PlayerDisconnect(Player *pl)
         return;
     }
 
+    pl->connected ++;
+
     for(int i = 0; i < GameList.size(); i++){
         if(GameList[i]->id == pl->GameID){
-            GameList[i]->PlayerDisconnected++;
+            GameList[i]->Disconnect(pl->id);
             if(GameList[i]->PlayerCount == GameList[i]->PlayerDisconnected){
                 GameManager::DestroyGame(GameList[i]);
             }
