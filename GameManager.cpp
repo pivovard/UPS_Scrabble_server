@@ -5,10 +5,10 @@
 #include "GameManager.h"
 
 int GameManager::game_count = 0;
-int player_count[3] = {0, 0, 0};
+int GameManager::player_count[3] = {0, 0, 0};
 
 vector<Game*> GameManager::GameList;
-vector<Player*> PlayerList[3] = {vector<Player*>(), vector<Player*>(), vector<Player*>()};
+vector<Player*> GameManager::PlayerList[3] = {vector<Player*>(), vector<Player*>(), vector<Player*>()};
 
 
 Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
