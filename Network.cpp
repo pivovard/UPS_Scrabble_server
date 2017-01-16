@@ -87,7 +87,7 @@ void Network::Listen()
             }
             else{
                 Player *pl = GameManager::GetPlayer(nick, n);
-                pl->connected++;
+                pl->connected = 2;
             }
         }
 

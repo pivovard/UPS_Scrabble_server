@@ -114,8 +114,6 @@ void Game::RecvTurn(string msg)
         matrix[x][y] = c;
 
         msg = msg.substr(i + 1);
-        cout << c << endl;
-        cout << msg << endl;
     }
 
     this->NextTurn();

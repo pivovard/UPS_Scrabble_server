@@ -5,10 +5,10 @@
 #include "GameManager.h"
 
 int GameManager::game_count = 0;
-static int player_count[3] = {0, 0, 0};
+int player_count[3] = {0, 0, 0};
 
 vector<Game*> GameManager::GameList;
-static vector<Player*> PlayerList[3] = {vector<Player*>(), vector<Player*>(), vector<Player*>()};
+vector<Player*> PlayerList[3] = {vector<Player*>(), vector<Player*>(), vector<Player*>()};
 
 
 Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
@@ -90,7 +90,7 @@ void GameManager::PlayerDisconnect(Player *pl)
         if(pl->connected == 1) player_count[pl->n-2]--;
 
         pl->connected = 2;
-        delete(pl);
+        //delete(pl);
         return;
     }
 
@@ -111,10 +111,10 @@ void GameManager::DestroyGame(Game *g)
 
     for(int i = 0; i < g->PlayerCount; i++){
         cout << "Player " << g->Players[i]->nick << " destroyed!" << endl;
-        delete(g->Players[i]);
+        //delete(g->Players[i]);
     }
 
-    delete(g);
+    //delete(g);
 }
 
 void GameManager::StartGame(int n)
@@ -122,9 +122,18 @@ void GameManager::StartGame(int n)
     Game *game;
 
     switch (n){
-        case 2: game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1)); break;
-        case 3: game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 3), PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1)); break;
-        case 4: game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 4), PlayerList[n-2].at(PlayerList[n-2].size() - 3), PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1)); break;
+        case 2:
+            game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1));
+            break;
+        case 3:
+            game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 3), PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1));
+            break;
+        case 4:
+            game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 4), PlayerList[n-2].at(PlayerList[n-2].size() - 3), PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1));
+            break;
+        default:
+            game = nullptr;
+            break;
     }
 
     GameList.push_back(game);
