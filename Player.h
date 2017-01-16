@@ -12,6 +12,7 @@ class Player
 public:
     int id;
     string nick;
+    int n;
     char *ip;
     int socket;
 

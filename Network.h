@@ -22,8 +22,6 @@ public:
     static void Listen();
     static void Exit();
 
-    //static void SendToPlayer(Player *pl);
-
 private:
     static int socket_desc , client_sock , c;
     static struct sockaddr_in server , client;

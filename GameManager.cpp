@@ -5,11 +5,13 @@
 #include "GameManager.h"
 
 int GameManager::game_count = 0;
+static int player_count[3] = {0, 0, 0};
 int GameManager::player_count2 = 0;
 int GameManager::player_count3 = 0;
 int GameManager::player_count4 = 0;
 
 vector<Game*> GameManager::GameList;
+static vector<Player*> PlayerList[3] = {vector<Player*>(), vector<Player*>(), vector<Player*>()};
 vector<Player*> GameManager::PlayerList2;
 vector<Player*> GameManager::PlayerList3;
 vector<Player*> GameManager::PlayerList4;
@@ -18,7 +20,7 @@ vector<Player*> GameManager::PlayerList4;
 Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
 {
     Player *pl;
-    switch(n)
+    /*switch(n)
     {
         case 2:
             pl = new Player(nick, ip, socket, player_count2);
@@ -47,7 +49,20 @@ Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
                 GameManager::Start4Game();
             }
             break;
+    }*/
+
+    pl = new Player(nick, ip, socket, PlayerList[n-2].size());
+    PlayerList[n-2].push_back(pl);
+    player_count[n-2]++;
+
+    //if((PlayerList[n-2].size() % 2) == 0){
+    if((player_count[n-2] % n) == 0){
+        GameManager::StartGame(n);
     }
+
+    cout << PlayerList[n-2].size() << endl;
+    cout << PlayerList[n-1].size() << endl;
+    cout << PlayerList[n].size() << endl;
 
     return pl;
 }
@@ -69,7 +84,7 @@ void GameManager::ResolveTurn(string msg)
 
 Player* GameManager::GetPlayer(string nick, int n)
 {
-    switch(n)
+    /*switch(n)
     {
         case 2:
             for(int i = 0; i < PlayerList2.size(); i++){
@@ -92,14 +107,20 @@ Player* GameManager::GetPlayer(string nick, int n)
                 }
             }
             break;
+    }*/
+
+    for(int i = 0; i < PlayerList[n-2].size(); i++){
+        if(nick == PlayerList[n-2][i]->nick && PlayerList[n-2][i]->connected < 2){
+            return PlayerList[n-2][i];
+        }
     }
 
-    return 0;
+    return nullptr;
 }
 
 int GameManager::CheckNick(string nick, int n)
 {
-    switch(n)
+    /*switch(n)
     {
         case 2:
             for(int i = 0; i < PlayerList2.size(); i++){
@@ -128,9 +149,16 @@ int GameManager::CheckNick(string nick, int n)
                 }
             }
             break;
+    }*/
+
+    for(int i = 0; i < PlayerList[n-2].size(); i++){
+        if(nick == PlayerList[n-2][i]->nick) {
+            if(PlayerList[n-2][i]->connected == 0) return 2; //pripojen hrajici, nick neni k dispozici
+            if(PlayerList[n-2][i]->connected == 1) return 1; //znovu pripojeni do hry
+        }
     }
 
-    return 0; // nick je volny
+    return 0 ; // nick je volny
 }
 
 void GameManager::PlayerReconnect(string nick, int n)
@@ -150,14 +178,17 @@ void GameManager::PlayerReconnect(string nick, int n)
 
 void GameManager::PlayerDisconnect(Player *pl)
 {
+    pl->connected ++;
+
     if(pl->GameID == -1){
         cout << "Player " << pl->nick << " destroyed!" << endl;
+
+        if(pl->connected == 1) player_count[pl->n-2]--;
+
         pl->connected = 2;
         delete(pl);
         return;
     }
-
-    pl->connected ++;
 
     for(int i = 0; i < GameList.size(); i++){
         if(GameList[i]->id == pl->GameID){
@@ -182,23 +213,16 @@ void GameManager::DestroyGame(Game *g)
     delete(g);
 }
 
-void GameManager::Start2Game()
+void GameManager::StartGame(int n)
 {
-    Game *game = new Game(game_count, PlayerList2.at(PlayerList2.size() - 2), PlayerList2.at(PlayerList2.size() - 1));
-    GameList.push_back(game);
-    game_count++;
-}
+    Game *game;
 
-void GameManager::Start3Game()
-{
-    Game *game = new Game(game_count, PlayerList3.at(PlayerList3.size() - 3), PlayerList3.at(PlayerList3.size() - 2), PlayerList3.at(PlayerList3.size() - 1));
-    GameList.push_back(game);
-    game_count++;
-}
+    switch (n){
+        case 2: game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1)); break;
+        case 3: game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 3), PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1)); break;
+        case 4: game = new Game(game_count, PlayerList[n-2].at(PlayerList[n-2].size() - 4), PlayerList[n-2].at(PlayerList[n-2].size() - 3), PlayerList[n-2].at(PlayerList[n-2].size() - 2), PlayerList[n-2].at(PlayerList[n-2].size() - 1)); break;
+    }
 
-void GameManager::Start4Game()
-{
-    Game *game = new Game(game_count, PlayerList4.at(PlayerList4.size() - 4), PlayerList4.at(PlayerList4.size() - 3), PlayerList4.at(PlayerList4.size() - 2), PlayerList4.at(PlayerList4.size() - 1));
     GameList.push_back(game);
     game_count++;
 }
@@ -207,25 +231,11 @@ void GameManager::Start4Game()
 
 void GameManager::Remove(Player *pl)
 {
-    for(int i = 0; i < PlayerList2.size(); i++){
-        if(PlayerList2[i]->id == pl->id){
-            PlayerList2.erase(PlayerList2.begin() + i);
-            delete(pl);
-            return;
-        }
-    }
+    int n = pl->n;
 
-    for(int i = 0; i < PlayerList3.size(); i++){
-        if(PlayerList3[i]->id == pl->id){
-            PlayerList3.erase(PlayerList3.begin() + i);
-            delete(pl);
-            return;
-        }
-    }
-
-    for(int i = 0; i < PlayerList4.size(); i++){
-        if(PlayerList4[i]->id == pl->id){
-            PlayerList4.erase(PlayerList4.begin() + i);
+    for(int i = 0; i < PlayerList[n-2].size(); i++){
+        if(PlayerList[n-2][i]->id == pl->id){
+            PlayerList[n-2].erase(PlayerList[n-2].begin() + i);
             delete(pl);
             return;
         }
