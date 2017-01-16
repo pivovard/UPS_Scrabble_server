@@ -11,12 +11,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc3515c8-87dd-43bf-a50a-431cd35f3677" name="Default" comment="PlayerList as array">
+    <list default="true" id="bc3515c8-87dd-43bf-a50a-431cd35f3677" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/UPS_Scrabble_server.exe" afterPath="$PROJECT_DIR$/cmake-build-debug/UPS_Scrabble_server.exe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameManager.cpp" afterPath="$PROJECT_DIR$/GameManager.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.cpp" afterPath="$PROJECT_DIR$/Player.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.h" afterPath="$PROJECT_DIR$/Player.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameManager.h" afterPath="$PROJECT_DIR$/GameManager.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,21 +34,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameManager.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameManager.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GameManager.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="36" column="6" lean-forward="false" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+            <state relative-caret-position="544">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameManager.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameManager.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+            <state relative-caret-position="119">
+              <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -118,10 +117,10 @@
         <option value="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/UPS_Scrabble_server.dir/depend.internal" />
         <option value="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
         <option value="$PROJECT_DIR$/cmake-build-debug/Makefile" />
-        <option value="$PROJECT_DIR$/GameManager.h" />
         <option value="$PROJECT_DIR$/Player.h" />
         <option value="$PROJECT_DIR$/Player.cpp" />
         <option value="$PROJECT_DIR$/GameManager.cpp" />
+        <option value="$PROJECT_DIR$/GameManager.h" />
       </list>
     </option>
   </component>
@@ -521,7 +520,7 @@
       <workItem from="1483552438469" duration="49838000" />
       <workItem from="1484058208427" duration="12255000" />
       <workItem from="1484167890734" duration="11736000" />
-      <workItem from="1484597428057" duration="7091000" />
+      <workItem from="1484597428057" duration="7263000" />
     </task>
     <task id="LOCAL-00001" summary="Port 1993">
       <created>1482960125088</created>
@@ -642,11 +641,18 @@
       <option name="project" value="LOCAL" />
       <updated>1484606619318</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Player.h add numbr of players in game">
+      <created>1484606773859</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1484606773859</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127236000" />
+    <option name="totallyTimeSpent" value="127408000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -696,7 +702,8 @@
     <MESSAGE value="same nick resolve" />
     <MESSAGE value="reconnect" />
     <MESSAGE value="PlayerList as array" />
-    <option name="LAST_COMMIT_MESSAGE" value="PlayerList as array" />
+    <MESSAGE value="Player.h add numbr of players in game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Player.h add numbr of players in game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1113,18 +1120,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameManager.h">
+    <entry file="file://$PROJECT_DIR$/GameManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="36" column="6" lean-forward="false" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+        <state relative-caret-position="119">
+          <caret line="7" column="39" lean-forward="false" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GameManager.cpp">
+    <entry file="file://$PROJECT_DIR$/GameManager.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        <state relative-caret-position="544">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
