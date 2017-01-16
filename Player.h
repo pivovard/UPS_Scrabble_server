@@ -24,7 +24,7 @@ public:
     char *message_in;
     char *message_out;
 
-    Player(string nick, char *ip, int socket, int id);
+    Player(string nick, int n, char *ip, int socket, int id);
 
     void SendToPlayer(string msg);
 };

@@ -4,9 +4,10 @@
 
 #include "Player.h"
 
-Player::Player(string nick, char *ip, int socket, int id)
+Player::Player(string nick, int n, char *ip, int socket, int id)
 {
     this->nick = nick;
+    this->n = n;
     this->ip = ip;
     this->socket = socket;
     this->id = id;

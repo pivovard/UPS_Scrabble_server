@@ -51,7 +51,7 @@ Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
             break;
     }*/
 
-    pl = new Player(nick, ip, socket, PlayerList[n-2].size());
+    pl = new Player(nick, n, ip, socket, PlayerList[n-2].size());
     PlayerList[n-2].push_back(pl);
     player_count[n-2]++;
 
@@ -59,10 +59,6 @@ Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
     if((player_count[n-2] % n) == 0){
         GameManager::StartGame(n);
     }
-
-    cout << PlayerList[n-2].size() << endl;
-    cout << PlayerList[n-1].size() << endl;
-    cout << PlayerList[n].size() << endl;
 
     return pl;
 }
