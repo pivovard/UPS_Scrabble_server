@@ -19,6 +19,11 @@ void Network::Start()
     }
     puts("Socket created.");
 
+    //set port release
+    int enable = 1;
+    if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+        perror("setsockopt(SO_REUSEADDR) failed");
+
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
@@ -57,43 +62,9 @@ void Network::Listen()
     {
         puts("Connection accepted.");
 
-        size = recv(client_sock, nick_in, 64, 0);
-        //char *nick = CropChar(nick_in, size);
-        string nick = string(nick_in);
-
-        i = nick.find('\n');
-        nick = nick.substr(0, i);
-
-        i = nick.find(';');
-        int n = stoi(nick.substr(i+1));
-        nick = nick.substr(0, i);
-
-        int res = GameManager::CheckNick(nick, n);
-        if(res == 2){
-            send(client_sock, "NICK\n", msg_length, 0);
-            continue;
-        }
-
-        if(res == 1){
-            char *m = new char[msg_length];
-            send(client_sock, "RETURN\n", msg_length, 0);
-            recv(client_sock , m , msg_length , 0);
-            string msg = string(m);
-            i = nick.find('\n');
-            msg = msg.substr(0, i);
-            if(strcmp(msg.c_str(), "RETURN") == 0) {
-                GameManager::PlayerReconnect(nick, n);
-                continue;
-            }
-            else{
-                Player *pl = GameManager::GetPlayer(nick, n);
-                pl->connected = 2;
-            }
-        }
-
         char *ip = inet_ntoa(client.sin_addr);
-
-        Player *pl = GameManager::PlayerConnect(nick, ip, client_sock, n);
+        Player *pl = new Player(ip, client_sock);
+        //Player *pl = GameManager::PlayerConnect(nick, ip, client_sock, n);
 
         std::thread thread_pl(Network::PlayerListen, pl);
         thread_pl.detach();
@@ -109,26 +80,27 @@ void Network::PlayerListen(Player *pl)
 {
     ssize_t size;
     string msg;
+    size_t i;
 
     cout << "Listenning player: " << pl->nick << "   " << pl->ip << endl;
     while( (size = recv(pl->socket , pl->message_in , msg_length , 0)) > 0){
-        //react on message
-        //cout << "Recv from " << pl->nick << ": " << pl->message_in << endl;
-        //msg = CropMsg(pl->message_in, size);
 
         msg = string(pl->message_in);
-        int i = msg.find('\n');
-        if (i!=std::string::npos) msg = msg.substr(0, i);
+        i = msg.find('\n');
+        if (i!=std::string::npos) {
+            msg = msg.substr(0, i);
+        }
+        else{
+            continue;
+        }
 
-        cout << "Recv from " << pl->nick << ": " << msg << endl;
-
+        cout << "Recv from " << pl->id << pl->nick << ": " << msg << endl;
         Resolve(msg , pl);
     }
 
     if(size == 0)
     {
         puts("Client disconnected");
-        //fflush(stdout);
     }
     else if(size == -1)
     {
@@ -145,12 +117,45 @@ void Network::PlayerListen(Player *pl)
 void Network::Resolve(string msg, Player *pl)
 {
     size_t i = msg.find(':', 0);
+    string type = msg;
 
-    string type = msg.substr(0, i);
-    msg = msg.substr(i + 1);
+    if(i!=std::string::npos){
+        type = msg.substr(0, i);
+        msg = msg.substr(i + 1);
+    }
 
     if(strcmp(type.c_str(), "TURN") == 0){
         GameManager::ResolveTurn(msg);
+    }
+    else if(strcmp(type.c_str(), "NICK") == 0){
+        i = msg.find(';');
+        pl->n = stoi(msg.substr(i+1));
+        pl->nick = msg.substr(0, i);
+
+        int res = GameManager::CheckNick(pl->nick, pl->n);
+        //existujici nick
+        if(res == 2){
+            send(client_sock, "NICK\n", msg_length, 0);
+            return;
+        }
+        //odpojeny klient
+        if(res == 1){
+            char *m = new char[msg_length];
+            send(client_sock, "RETURN\n", msg_length, 0);
+        }
+        //volny nick
+        if(res == 0){
+            GameManager::PlayerConnect(pl);
+        }
+    }
+    else if(strcmp(type.c_str(), "RETURN") == 0){
+        GameManager::PlayerReconnect(pl);
+    }
+    else if(strcmp(type.c_str(), "NEW") == 0){
+        Player *p = GameManager::GetPlayer(pl->nick, pl->n);
+        p->connected = 2;
+
+        GameManager::PlayerConnect(pl);
     }
     /*else if(strcmp(type.c_str(), "END") == 0){
         pl->connected = 2;

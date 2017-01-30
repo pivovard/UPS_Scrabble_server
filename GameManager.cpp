@@ -19,57 +19,32 @@ Player* GameManager::PlayerConnect(string nick, char *ip, int socket, int n)
     PlayerList[n-2].push_back(pl);
     player_count[n-2]++;
 
-    //if((PlayerList[n-2].size() % 2) == 0){
     if((player_count[n-2] % n) == 0){
         GameManager::StartGame(n);
     }
-
     return pl;
 }
 
-void GameManager::ResolveTurn(string msg)
+void GameManager::PlayerConnect(Player *pl)
 {
-    size_t i = msg.find(':', 0);
+    int n = pl->n;
+    pl->id = PlayerList[n-2].size();
 
-    int id = stoi(msg.substr(0, i));
-    msg = msg.substr(i + 1);
+    PlayerList[n-2].push_back(pl);
+    player_count[n-2]++;
 
-    for(int i = 0; i < GameList.size(); i++){
-        if(GameList[i]->id == id){
-            GameList[i]->RecvTurn(msg);
-            break;
-        }
+    if((player_count[n-2] % n) == 0){
+        GameManager::StartGame(n);
     }
 }
 
-Player* GameManager::GetPlayer(string nick, int n)
+void GameManager::PlayerReconnect(Player *pl)
 {
-    for(int i = 0; i < PlayerList[n-2].size(); i++){
-        if(nick == PlayerList[n-2][i]->nick && PlayerList[n-2][i]->connected < 2){
-            return PlayerList[n-2][i];
-        }
-    }
+    cout << "Player " << pl->nick << " reconnected!" << endl;
+    int socket = pl->socket;
 
-    return nullptr;
-}
-
-int GameManager::CheckNick(string nick, int n)
-{
-    for(int i = 0; i < PlayerList[n-2].size(); i++){
-        if(nick == PlayerList[n-2][i]->nick) {
-            if(PlayerList[n-2][i]->connected == 0) return 2; //pripojen hrajici, nick neni k dispozici
-            if(PlayerList[n-2][i]->connected == 1) return 1; //znovu pripojeni do hry
-        }
-    }
-
-    return 0 ; // nick je volny
-}
-
-void GameManager::PlayerReconnect(string nick, int n)
-{
-    cout << "Player " << nick << " Reconnected!" << endl;
-
-    Player *pl = GameManager::GetPlayer(nick, n);
+    pl = GameManager::GetPlayer(pl->nick, pl->n);
+    pl->socket = socket;
     pl->connected = 0;
 
     for(int i = 0; i < GameList.size(); i++){
@@ -105,16 +80,42 @@ void GameManager::PlayerDisconnect(Player *pl)
     }
 }
 
-void GameManager::DestroyGame(Game *g)
+void GameManager::ResolveTurn(string msg)
 {
-    cout << "Game " << g->id << " destroyed!" << endl;
+    size_t i = msg.find(':', 0);
 
-    for(int i = 0; i < g->PlayerCount; i++){
-        cout << "Player " << g->Players[i]->nick << " destroyed!" << endl;
-        //delete(g->Players[i]);
+    int id = stoi(msg.substr(0, i));
+    msg = msg.substr(i + 1);
+
+    for(int i = 0; i < GameList.size(); i++){
+        if(GameList[i]->id == id){
+            GameList[i]->RecvTurn(msg);
+            break;
+        }
+    }
+}
+
+Player* GameManager::GetPlayer(string nick, int n)
+{
+    for(int i = PlayerList[n-2].size() - 1; i > -1; i--){
+        if(nick == PlayerList[n-2][i]->nick && PlayerList[n-2][i]->connected < 2){
+            return PlayerList[n-2][i];
+        }
     }
 
-    //delete(g);
+    return nullptr;
+}
+
+int GameManager::CheckNick(string nick, int n)
+{
+    for(int i = PlayerList[n-2].size() - 1; i > -1; i--){
+        if(nick == PlayerList[n-2][i]->nick) {
+            if(PlayerList[n-2][i]->connected == 0) return 2; //pripojen hrajici, nick neni k dispozici
+            if(PlayerList[n-2][i]->connected == 1) return 1; //znovu pripojeni do hry
+        }
+    }
+
+    return 0 ; // nick je volny
 }
 
 void GameManager::StartGame(int n)
@@ -140,7 +141,17 @@ void GameManager::StartGame(int n)
     game_count++;
 }
 
+void GameManager::DestroyGame(Game *g)
+{
+    cout << "Game " << g->id << " destroyed!" << endl;
 
+    for(int i = 0; i < g->PlayerCount; i++){
+        cout << "Player " << g->Players[i]->nick << " destroyed!" << endl;
+        //delete(g->Players[i]);
+    }
+
+    //delete(g);
+}
 
 void GameManager::Remove(Player *pl)
 {

@@ -17,13 +17,14 @@ class GameManager
 public:
 
     static Player* PlayerConnect(string nick, char *ip, int socket, int n);
+    static void PlayerConnect(Player *pl);
 
     static int CheckNick(string nick, int n);
     static Player* GetPlayer(string nick, int n);
 
     static void ResolveTurn(string msg);
 
-    static void PlayerReconnect(string nick, int n);
+    static void PlayerReconnect(Player *pl);
     static void PlayerDisconnect(Player *pl);
 
 private:

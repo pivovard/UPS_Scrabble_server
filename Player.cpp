@@ -4,6 +4,18 @@
 
 #include "Player.h"
 
+Player::Player(char *ip, int socket)
+{
+    this->nick = "";
+    this->n = -1;
+    this->ip = ip;
+    this->socket = socket;
+    this->id = -1;
+
+    this->message_in = new char[msg_length];
+    this->message_out = new char[msg_length];
+}
+
 Player::Player(string nick, int n, char *ip, int socket, int id)
 {
     this->nick = nick;
@@ -18,7 +30,7 @@ Player::Player(string nick, int n, char *ip, int socket, int id)
 
 void Player::SendToPlayer(string msg)
 {
-    cout << "Send to " << this->nick << ": " << msg << endl;
+    cout << "Send to " << this->id << this->nick << ": " << msg << endl;
 
     ssize_t size = 0;
     while(size < msg.length()){

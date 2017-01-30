@@ -77,14 +77,18 @@ void Game::Init()
 
 void Game::NextTurn()
 {
-    if(PlayerDisconnected + 1 == PlayerCount || PlayerDisconnected == PlayerCount) return; //pokud je pocet mensi jak 2, nelze hrat
+    if((PlayerCount - PlayerDisconnected) < 2) return; //pokud je pocet mensi jak 2, nelze hrat
 
     PlayerNext++;
     if(PlayerNext == PlayerCount) PlayerNext = 0;
 
-    if(Players[PlayerNext]->connected > 0) this->NextTurn();
-
-    Players[PlayerNext]->SendToPlayer("TURN\n");
+    //pokud je hrac pripojen, posle se mu turn
+    if(Players[PlayerNext]->connected == 0){
+        Players[PlayerNext]->SendToPlayer("TURN\n");
+    }
+    else {
+        this->NextTurn();
+    }
 }
 
 void Game::RecvTurn(string msg)
@@ -105,16 +109,29 @@ void Game::RecvTurn(string msg)
     //doubles of numbers
     while((i = msg.find(';')) != string::npos){
         j = msg.find(',');
-        k = msg.find(',', j);
-
         x = stoi(msg.substr(0, j));
-        y = stoi(msg.substr(j + 1, k - j -1));
-        c = msg.at(k+1);
+        msg = msg.substr(j + 1);
 
+        j = msg.find(',');
+        y = stoi(msg.substr(0, j));
+        msg = msg.substr(j + 1);
+
+        c = msg.at(0);
         matrix[x][y] = c;
 
-        msg = msg.substr(i + 1);
+        msg = msg.substr(2); //msg = msg.substr(i + 1);
     }
+
+    j = msg.find(',');
+    x = stoi(msg.substr(0, j));
+    msg = msg.substr(j + 1);
+
+    j = msg.find(',');
+    y = stoi(msg.substr(0, j));
+    msg = msg.substr(j + 1);
+
+    c = msg.at(0);
+    matrix[x][y] = c;
 
     this->NextTurn();
 }
@@ -135,8 +152,9 @@ void Game::Disconnect(int id)
     string msg = "DISC:" + to_string(id) + "\n";
     for(int i = 0; i < PlayerCount; i ++){
         if(Players[i]->connected == 0) Players[i]->SendToPlayer(msg);
-        if(Players[i]->id == id) this->NextTurn(); //pokud byl odpojeny hrac na tahu
     }
+
+    if(Players[PlayerNext]->id == id) this->NextTurn(); //pokud byl odpojeny hrac na tahu
 }
 
 
@@ -156,12 +174,13 @@ void Game::Reconnect(int id)
     for(int i = 0; i < 15; i++){
         for(int j = 0; j < 15; j++){
             if(matrix[i][j] != '\0'){
-                msg += to_string(i) + "," + to_string(j) + "," + to_string(matrix[i][j]);
+                msg += to_string(i) + "," + to_string(j) + "," + matrix[i][j];
                 msg += ";";
             }
         }
     }
     msg = msg.substr(0, msg.length() - 1);
+    msg += "\n";
 
     string msg2 = "RECN:" + to_string(id) + "\n";
 
@@ -175,5 +194,5 @@ void Game::Reconnect(int id)
     }
 
     this->PlayerDisconnected--;
-    if(PlayerDisconnected + 2 == PlayerCount) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
+    if((PlayerCount - PlayerDisconnected) == 2) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
 }
