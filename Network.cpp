@@ -26,7 +26,7 @@ void Network::Start()
 
     //set timeout
     struct timeval timeout;
-    timeout.tv_sec = 10;
+    timeout.tv_sec = 1;
     timeout.tv_usec = 0;
 
     if (setsockopt (socket_desc, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
@@ -74,7 +74,7 @@ void Network::Listen()
         puts("Connection accepted.");
 
         struct timeval timeout;
-        timeout.tv_sec = 10;
+        timeout.tv_sec = 1;
         timeout.tv_usec = 0;
 
         if (setsockopt (client_sock, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
@@ -182,6 +182,9 @@ void Network::Resolve(string msg, Player *pl)
         pl->connected = 2;
         GameManager::PlayerDisconnect(pl);
     }*/
+    else {
+        close(pl->socket);
+    }
 }
 
 void Network::Exit()
