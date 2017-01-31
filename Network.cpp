@@ -73,6 +73,16 @@ void Network::Listen()
     {
         puts("Connection accepted.");
 
+        struct timeval timeout;
+        timeout.tv_sec = 10;
+        timeout.tv_usec = 0;
+
+        if (setsockopt (client_sock, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
+            perror("setsockopt failed\n");
+
+        if (setsockopt (client_sock, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
+            perror("setsockopt failed\n");
+
         char *ip = inet_ntoa(client.sin_addr);
         Player *pl = new Player(ip, client_sock);
         //Player *pl = GameManager::PlayerConnect(nick, ip, client_sock, n);
