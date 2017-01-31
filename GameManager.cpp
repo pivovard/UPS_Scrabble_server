@@ -147,6 +147,7 @@ void GameManager::DestroyGame(Game *g)
 
     for(int i = 0; i < g->PlayerCount; i++){
         cout << "Player " << g->Players[i]->nick << " destroyed!" << endl;
+        g->Players[i]->connected = 2;
         //delete(g->Players[i]);
     }
 
