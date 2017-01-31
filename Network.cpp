@@ -25,7 +25,7 @@ void Network::Start()
         perror("setsockopt(SO_REUSEADDR) failed");
 
     //set timeout
-    struct timeval timeout;
+    /*struct timeval timeout;
     timeout.tv_sec = 1;
     timeout.tv_usec = 0;
 
@@ -33,7 +33,7 @@ void Network::Start()
         perror("setsockopt failed\n");
 
     if (setsockopt (socket_desc, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
-        perror("setsockopt failed\n");
+        perror("setsockopt failed\n");*/
 
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
@@ -73,7 +73,7 @@ void Network::Listen()
     {
         puts("Connection accepted.");
 
-        struct timeval timeout;
+        /*struct timeval timeout;
         timeout.tv_sec = 1;
         timeout.tv_usec = 0;
 
@@ -81,7 +81,7 @@ void Network::Listen()
             perror("setsockopt failed\n");
 
         if (setsockopt (client_sock, SOL_SOCKET, SO_SNDTIMEO, (char *)&timeout, sizeof(timeout)) < 0)
-            perror("setsockopt failed\n");
+            perror("setsockopt failed\n");*/
 
         char *ip = inet_ntoa(client.sin_addr);
         Player *pl = new Player(ip, client_sock);
@@ -183,7 +183,9 @@ void Network::Resolve(string msg, Player *pl)
         GameManager::PlayerDisconnect(pl);
     }*/
     else {
+        cout << "Message not resolved, client killed!" << endl;
         close(pl->socket);
+        GameManager::PlayerDisconnect(pl);
     }
 }
 

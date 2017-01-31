@@ -11,7 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc3515c8-87dd-43bf-a50a-431cd35f3677" name="Default" comment="">
+    <list default="true" id="bc3515c8-87dd-43bf-a50a-431cd35f3677" name="Default" comment="close client socket on wrong recv&#10;&#10;set timeout on 1s">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Network.cpp" afterPath="$PROJECT_DIR$/Network.cpp" />
     </list>
@@ -35,8 +35,8 @@
       <file leaf-file-name="Network.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Network.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="185" column="26" lean-forward="false" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
+            <state relative-caret-position="198">
+              <caret line="27" column="6" lean-forward="false" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -45,8 +45,8 @@
       <file leaf-file-name="GameManager.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GameManager.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="142" column="0" lean-forward="true" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+            <state relative-caret-position="266">
+              <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -405,7 +405,7 @@
       <workItem from="1484167890734" duration="11736000" />
       <workItem from="1484597428057" duration="11026000" />
       <workItem from="1485450757637" duration="1738000" />
-      <workItem from="1485710586200" duration="22344000" />
+      <workItem from="1485710586200" duration="23105000" />
     </task>
     <task id="LOCAL-00001" summary="Port 1993">
       <created>1482960125088</created>
@@ -582,11 +582,18 @@
       <option name="project" value="LOCAL" />
       <updated>1485887744157</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="close client socket on wrong recv&#10;&#10;set timeout on 1s">
+      <created>1485889484869</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1485889484869</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155253000" />
+    <option name="totallyTimeSpent" value="156014000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -620,7 +627,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Port 1993" />
     <MESSAGE value="GameManager" />
     <MESSAGE value="Creating game for 2 players" />
     <MESSAGE value="Nefunkcni...posralo se to cyklickou deklaraci Network-Game" />
@@ -645,7 +651,8 @@
     <MESSAGE value="Separated receving new connection and listening....reslove new game or reconnect in listenning thread&#10;&#10;Repair receive turn...add char to matrix" />
     <MESSAGE value="Player.connected 2 after on Game destroy&#10;&#10;socket timeouts (send/recv)" />
     <MESSAGE value="socket timeouts (send/recv) for client socket" />
-    <option name="LAST_COMMIT_MESSAGE" value="socket timeouts (send/recv) for client socket" />
+    <MESSAGE value="close client socket on wrong recv&#10;&#10;set timeout on 1s" />
+    <option name="LAST_COMMIT_MESSAGE" value="close client socket on wrong recv&#10;&#10;set timeout on 1s" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1026,16 +1033,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GameManager.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="142" column="0" lean-forward="true" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+        <state relative-caret-position="266">
+          <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Network.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="185" column="26" lean-forward="false" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
+        <state relative-caret-position="198">
+          <caret line="27" column="6" lean-forward="false" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
           <folding />
         </state>
       </provider>
