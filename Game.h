@@ -19,6 +19,7 @@ public:
 
     int PlayerCount;
     int PlayerNext;
+    int PlayerOnTurn;
     int PlayerDisconnected;
 
     vector<Player*> Players;

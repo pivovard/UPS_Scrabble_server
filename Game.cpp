@@ -8,8 +8,6 @@ Game::Game(int id, Player *pl1, Player *pl2)
 {
     this->id = id;
     this->PlayerCount = 2;
-    this->PlayerNext = -1;
-    this->PlayerDisconnected = 0;
 
     this->Players.push_back(pl1);
     this->Players.push_back(pl2);
@@ -21,7 +19,6 @@ Game::Game(int id, Player *pl1, Player *pl2, Player *pl3)
 {
     this->id = id;
     this->PlayerCount = 3;
-    this->PlayerNext = -1;
 
     this->Players.push_back(pl1);
     this->Players.push_back(pl2);
@@ -34,7 +31,6 @@ Game::Game(int id, Player *pl1, Player *pl2, Player *pl3, Player *pl4)
 {
     this->id = id;
     this->PlayerCount = 4;
-    this->PlayerNext = -1;
 
     this->Players.push_back(pl1);
     this->Players.push_back(pl2);
@@ -46,6 +42,11 @@ Game::Game(int id, Player *pl1, Player *pl2, Player *pl3, Player *pl4)
 
 void Game::Init()
 {
+
+    this->PlayerNext = -1;
+    this->PlayerOnTurn = 0;
+    this->PlayerDisconnected = 0;
+
     for(int i = 0; i < 15; i++){
         for(int j = 0; j < 15; j++){
             this->matrix[i][j] = '\0';
@@ -78,6 +79,7 @@ void Game::Init()
 void Game::NextTurn()
 {
     if((PlayerCount - PlayerDisconnected) < 2) return; //pokud je pocet mensi jak 2, nelze hrat
+    if(PlayerOnTurn == 1) return; //pokud uz je nejaky hrac na tahu
 
     PlayerNext++;
     if(PlayerNext == PlayerCount) PlayerNext = 0;
@@ -85,6 +87,7 @@ void Game::NextTurn()
     //pokud je hrac pripojen, posle se mu turn
     if(Players[PlayerNext]->connected == 0){
         Players[PlayerNext]->SendToPlayer("TURN\n");
+        this->PlayerOnTurn = 1;
     }
     else {
         this->NextTurn();
@@ -93,6 +96,8 @@ void Game::NextTurn()
 
 void Game::RecvTurn(string msg)
 {
+    this->PlayerOnTurn = 0;
+
     this->SendTurn(msg);
 
     //score
@@ -183,7 +188,8 @@ void Game::Reconnect(Player *pl)
     }
 
     this->PlayerDisconnected--;
-    if((PlayerCount - PlayerDisconnected) == 2) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
+    //if((PlayerCount - PlayerDisconnected) == 2) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
+    if(this->PlayerOnTurn == 0) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
 }
 
 void Game::Disconnect(int id)
@@ -194,5 +200,8 @@ void Game::Disconnect(int id)
         if(Players[i]->connected == 0) Players[i]->SendToPlayer(msg);
     }
 
-    if(Players[PlayerNext]->id == id) this->NextTurn(); //pokud byl odpojeny hrac na tahu
+    if(Players[PlayerNext]->id == id){
+        this->PlayerOnTurn = 0;
+        this->NextTurn(); //pokud byl odpojeny hrac na tahu
+    }
 }
