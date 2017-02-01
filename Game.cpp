@@ -97,7 +97,7 @@ void Game::RecvTurn(string msg)
 
     //score
     size_t i = msg.find(';');
-    Players[PlayerNext]->score += stoi(msg.substr(0, i));
+    Players[PlayerNext]->score = stoi(msg.substr(0, i));
 
     int x;
     int y;
@@ -146,21 +146,9 @@ void Game::SendTurn(string msg)
     }
 }
 
-void Game::Disconnect(int id)
+void Game::Reconnect(Player *pl)
 {
-    this->PlayerDisconnected ++;
-    string msg = "DISC:" + to_string(id) + "\n";
-    for(int i = 0; i < PlayerCount; i ++){
-        if(Players[i]->connected == 0) Players[i]->SendToPlayer(msg);
-    }
-
-    if(Players[PlayerNext]->id == id) this->NextTurn(); //pokud byl odpojeny hrac na tahu
-}
-
-
-void Game::Reconnect(int id)
-{
-    string msg = "GAMER:" + to_string(id) + ":";
+    string msg = "GAMER:" + to_string(this->id) + ":";
     for(int i = 0; i < PlayerCount; i++){
         msg += to_string(Players[i]->id);
         msg += ",";
@@ -182,10 +170,11 @@ void Game::Reconnect(int id)
     msg = msg.substr(0, msg.length() - 1);
     msg += "\n";
 
-    string msg2 = "RECN:" + to_string(id) + "\n";
+    string msg2 = "RECN:" + to_string(pl->id) + "\n";
 
     for(int i = 0; i < PlayerCount; i ++) {
-        if (Players[i]->id == id) {
+        if (Players[i]->id == pl->id) {
+            Players[i] = pl;
             Players[i]->SendToPlayer(msg);
         }
         else{
@@ -195,4 +184,15 @@ void Game::Reconnect(int id)
 
     this->PlayerDisconnected--;
     if((PlayerCount - PlayerDisconnected) == 2) this->NextTurn(); // pripojeni druheho hrace, znovu start hry
+}
+
+void Game::Disconnect(int id)
+{
+    this->PlayerDisconnected ++;
+    string msg = "DISC:" + to_string(id) + "\n";
+    for(int i = 0; i < PlayerCount; i ++){
+        if(Players[i]->connected == 0) Players[i]->SendToPlayer(msg);
+    }
+
+    if(Players[PlayerNext]->id == id) this->NextTurn(); //pokud byl odpojeny hrac na tahu
 }

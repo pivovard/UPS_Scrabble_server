@@ -28,7 +28,7 @@ public:
     Game(int id, Player *pl1, Player *pl2, Player *pl3, Player *pl4);
 
     void RecvTurn(string msg);
-    void Reconnect(int id);
+    void Reconnect(Player *pl);
     void Disconnect(int id);
 
 private:

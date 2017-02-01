@@ -28,6 +28,8 @@ public:
     Player(char *ip, int socket);
 
     void SendToPlayer(string msg);
+
+    void ClonePlayer(Player *pl);
 };
 
 #endif //UPS_SCRABBLE_SERVER_PLAYER_H

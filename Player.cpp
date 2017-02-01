@@ -38,3 +38,10 @@ void Player::SendToPlayer(string msg)
         size = send(this->socket , msg.c_str() , msg_length, 0);
     }
 }
+
+void Player::ClonePlayer(Player *pl)
+{
+    this->id = pl->id;
+    this->GameID = pl->GameID;
+    this->score = pl->score;
+}

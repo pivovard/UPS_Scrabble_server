@@ -41,15 +41,19 @@ void GameManager::PlayerConnect(Player *pl)
 void GameManager::PlayerReconnect(Player *pl)
 {
     cout << "Player " << pl->nick << " reconnected!" << endl;
-    int socket = pl->socket;
 
-    pl = GameManager::GetPlayer(pl->nick, pl->n);
-    pl->socket = socket;
+    pl->ClonePlayer(GameManager::GetPlayer(pl->nick, pl->n));
     pl->connected = 0;
+
+    for(int i = PlayerList[pl->n -2].size() - 1; i > -1; i--){
+        if(pl->nick == PlayerList[pl->n -2][i]->nick && PlayerList[pl->n -2][i]->connected < 2){
+            PlayerList[pl->n -2][i] = pl;
+        }
+    }
 
     for(int i = 0; i < GameList.size(); i++){
         if(GameList[i]->id == pl->GameID){
-            GameList[i]->Reconnect(pl->id);
+            GameList[i]->Reconnect(pl);
             break;
         }
     }
