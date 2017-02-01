@@ -48,6 +48,7 @@ void GameManager::PlayerReconnect(Player *pl)
     for(int i = PlayerList[pl->n -2].size() - 1; i > -1; i--){
         if(pl->nick == PlayerList[pl->n -2][i]->nick && PlayerList[pl->n -2][i]->connected < 2){
             PlayerList[pl->n -2][i] = pl;
+            break;
         }
     }
 

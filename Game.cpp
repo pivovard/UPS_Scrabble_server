@@ -98,10 +98,13 @@ void Game::RecvTurn(string msg)
 {
     this->PlayerOnTurn = 0;
 
+    size_t i = msg.find(';');
+    if(i == std::string::npos) return; //return, pokud nejsou zadne tahy
+
+    //preposlani tahu ostatnim hracum
     this->SendTurn(msg);
 
     //score
-    size_t i = msg.find(';');
     Players[PlayerNext]->score = stoi(msg.substr(0, i));
 
     int x;
