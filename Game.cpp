@@ -99,7 +99,11 @@ void Game::RecvTurn(string msg)
     this->PlayerOnTurn = 0;
 
     size_t i = msg.find(';');
-    if(i == std::string::npos) return; //return, pokud nejsou zadne tahy
+    //NextTurn, pokud nejsou zadne tahy
+    if(i == std::string::npos){
+        this->NextTurn();
+        return;
+    }
 
     //preposlani tahu ostatnim hracum
     this->SendTurn(msg);
