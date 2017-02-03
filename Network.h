@@ -27,6 +27,7 @@ private:
     static struct sockaddr_in server , client;
 
     static void PlayerListen(Player *pl);
+    static void PlayerPing(Player * pl);
 
     static void Resolve(string msg, Player *pl);
 

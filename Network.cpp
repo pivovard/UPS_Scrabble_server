@@ -79,6 +79,9 @@ void Network::Listen()
 
         std::thread thread_pl(Network::PlayerListen, pl);
         thread_pl.detach();
+
+        std::thread thread_ping(Network::PlayerPing, pl);
+        thread_ping.detach();
     }
 
     if (client_sock < 0)
@@ -171,10 +174,22 @@ void Network::Resolve(string msg, Player *pl)
     else if(strcmp(type.c_str(), "END") == 0){
         return;
     }
+    else if(strcmp(type.c_str(), "PING") == 0){
+        return;
+    }
     else {
         cout << "Message not resolved, client killed!" << endl;
         close(pl->socket);
         GameManager::PlayerDisconnect(pl);
+    }
+}
+
+void Network::PlayerPing(Player * pl)
+{
+    while(true){
+        pl->SendToPlayer("PING\n");
+        sleep(5);
+
     }
 }
 
