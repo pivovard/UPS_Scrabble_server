@@ -186,7 +186,7 @@ void Network::Resolve(string msg, Player *pl)
 
 void Network::PlayerPing(Player * pl)
 {
-    while(true){
+    while(true && pl->connected == 0){
         pl->ping++;
         if(pl->ping > 5){
             GameManager::PlayerDisconnect(pl);
