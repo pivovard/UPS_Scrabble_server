@@ -8,6 +8,8 @@
 int Network::socket_desc , Network::client_sock , Network::c;
 struct sockaddr_in Network::server , Network::client;
 
+int Network::ping = 0;
+
 void Network::Start()
 {
     //Create socket
@@ -175,6 +177,7 @@ void Network::Resolve(string msg, Player *pl)
         return;
     }
     else if(strcmp(type.c_str(), "PING") == 0){
+        Network::ping --;
         return;
     }
     else {
@@ -185,12 +188,12 @@ void Network::Resolve(string msg, Player *pl)
 
 void Network::PlayerPing(Player * pl)
 {
-    int err;
     while(true){
-        if(pl->connected == 0) err = pl->SendToPlayer("PING\n");
-        else break;
-
-        //if(err != 0) break;
+        Network::ping++;
+        if(Network::ping > 10){
+            GameManager::PlayerDisconnect(pl);
+            break;
+        }
 
         sleep(5);
     }

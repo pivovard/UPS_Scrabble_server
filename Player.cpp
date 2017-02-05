@@ -29,23 +29,14 @@ Player::Player(string nick, int n, char *ip, int socket, int id)
     this->message_out = new char[msg_length];
 }
 
-int Player::SendToPlayer(string msg)
+void Player::SendToPlayer(string msg)
 {
     cout << "Send to " << this->id << this->nick << ": " << msg << endl;
 
     ssize_t size = 0;
     while(size < msg.length()){
         size = send(this->socket , msg.c_str() , msg_length, 0);
-
-        cout << errno << endl;
-        /*if(errno != 0){
-            cout << "Player " << this->nick << " connection timeout." << endl;
-            perror("error:");
-            GameManager::PlayerDisconnect(this);
-            return errno;
-        }*/
     }
-    return size;
 }
 
 void Player::ClonePlayer(Player *pl)

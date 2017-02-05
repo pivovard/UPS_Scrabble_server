@@ -27,7 +27,7 @@ public:
     Player(string nick, int n, char *ip, int socket, int id);
     Player(char *ip, int socket);
 
-    int SendToPlayer(string msg);
+    void SendToPlayer(string msg);
 
     void ClonePlayer(Player *pl);
 };

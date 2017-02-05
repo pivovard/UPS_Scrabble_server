@@ -26,6 +26,8 @@ private:
     static int socket_desc , client_sock , c;
     static struct sockaddr_in server , client;
 
+    static int ping;
+
     static void PlayerListen(Player *pl);
     static void PlayerPing(Player * pl);
 
