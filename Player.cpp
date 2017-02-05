@@ -39,6 +39,7 @@ int Player::SendToPlayer(string msg)
         size = send(this->socket , msg.c_str() , msg_length, 0);
 
         if(size < 0){
+            cout << "Player " << this->nick << " connection timeout." << endl;
             GameManager::PlayerDisconnect(this);
             return size;
         }

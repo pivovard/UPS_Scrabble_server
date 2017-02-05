@@ -188,7 +188,8 @@ void Network::PlayerPing(Player * pl)
 {
     int size;
     while(true){
-        size = pl->SendToPlayer("PING\n");
+        if(pl->connected == 0) size = pl->SendToPlayer("PING\n");
+        else break;
 
         if(size < 0) break;
 
