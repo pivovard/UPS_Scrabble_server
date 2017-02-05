@@ -190,7 +190,7 @@ void Network::PlayerPing(Player * pl)
         if(pl->connected == 0) err = pl->SendToPlayer("PING\n");
         else break;
 
-        if(err != 0) break;
+        //if(err != 0) break;
 
         sleep(5);
     }
