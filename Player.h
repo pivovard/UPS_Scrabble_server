@@ -17,6 +17,7 @@ public:
     int socket;
 
     int connected = 0;
+    int ping = 0;
 
     int GameID = -1;
     int score = 0;

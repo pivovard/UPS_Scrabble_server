@@ -177,7 +177,7 @@ void Network::Resolve(string msg, Player *pl)
         return;
     }
     else if(strcmp(type.c_str(), "PING") == 0){
-        Network::ping --;
+        pl->ping--;
         return;
     }
     else {
@@ -189,7 +189,7 @@ void Network::Resolve(string msg, Player *pl)
 void Network::PlayerPing(Player * pl)
 {
     while(true){
-        Network::ping++;
+        pl->ping++;
         if(Network::ping > 5){
             GameManager::PlayerDisconnect(pl);
             break;

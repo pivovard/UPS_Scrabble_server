@@ -62,7 +62,7 @@ void GameManager::PlayerReconnect(Player *pl)
 
 void GameManager::PlayerDisconnect(Player *pl)
 {
-    pl->connected ++;
+    pl->connected = 1;
 
     if(pl->GameID == -1){
         cout << "Player " << pl->nick << " destroyed!" << endl;
