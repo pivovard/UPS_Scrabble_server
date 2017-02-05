@@ -3,6 +3,7 @@
 //
 
 #include "Player.h"
+#include "GameManager.h"
 
 Player::Player(char *ip, int socket)
 {
@@ -28,7 +29,7 @@ Player::Player(string nick, int n, char *ip, int socket, int id)
     this->message_out = new char[msg_length];
 }
 
-void Player::SendToPlayer(string msg)
+int Player::SendToPlayer(string msg)
 {
     cout << "Send to " << this->id << this->nick << ": " << msg << endl;
 
@@ -36,7 +37,13 @@ void Player::SendToPlayer(string msg)
     while(size < msg.length()){
         //size = write(this->socket , msg.c_str() , msg_length);
         size = send(this->socket , msg.c_str() , msg_length, 0);
+
+        if(size < 0){
+            GameManager::PlayerDisconnect(this);
+            return size;
+        }
     }
+    return size;
 }
 
 void Player::ClonePlayer(Player *pl)

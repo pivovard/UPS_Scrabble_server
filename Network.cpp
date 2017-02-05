@@ -186,10 +186,13 @@ void Network::Resolve(string msg, Player *pl)
 
 void Network::PlayerPing(Player * pl)
 {
+    int size;
     while(true){
-        pl->SendToPlayer("PING\n");
-        sleep(5);
+        size = pl->SendToPlayer("PING\n");
 
+        if(size < 0) break;
+
+        sleep(5);
     }
 }
 
