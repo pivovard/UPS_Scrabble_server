@@ -179,19 +179,18 @@ void Network::Resolve(string msg, Player *pl)
     }
     else {
         cout << "Message not resolved, client killed!" << endl;
-        close(pl->socket);
         GameManager::PlayerDisconnect(pl);
     }
 }
 
 void Network::PlayerPing(Player * pl)
 {
-    int size;
+    int err;
     while(true){
-        if(pl->connected == 0) size = pl->SendToPlayer("PING\n");
+        if(pl->connected == 0) err = pl->SendToPlayer("PING\n");
         else break;
 
-        if(size < 0) break;
+        if(err != 0) break;
 
         sleep(5);
     }

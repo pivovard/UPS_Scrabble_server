@@ -62,6 +62,7 @@ void GameManager::PlayerReconnect(Player *pl)
 
 void GameManager::PlayerDisconnect(Player *pl)
 {
+    close(pl->socket);
     pl->connected ++;
 
     if(pl->GameID == -1){

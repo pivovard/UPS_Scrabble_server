@@ -28,6 +28,9 @@ CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../Network.h
 CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../Player.h
 CMakeFiles/UPS_Scrabble_server.dir/Network.cpp.o: ../stdafx.h
 
+CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../Game.h
+CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../GameManager.h
+CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../Network.h
 CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../Player.cpp
 CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../Player.h
 CMakeFiles/UPS_Scrabble_server.dir/Player.cpp.o: ../stdafx.h
