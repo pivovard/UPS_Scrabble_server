@@ -8,8 +8,6 @@
 int Network::socket_desc , Network::client_sock , Network::c;
 struct sockaddr_in Network::server , Network::client;
 
-int Network::ping = 0;
-
 void Network::Start()
 {
     //Create socket
@@ -190,7 +188,7 @@ void Network::PlayerPing(Player * pl)
 {
     while(true){
         pl->ping++;
-        if(Network::ping > 5){
+        if(pl->ping > 5){
             GameManager::PlayerDisconnect(pl);
             break;
         }
