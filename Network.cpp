@@ -190,7 +190,7 @@ void Network::PlayerPing(Player * pl)
 {
     while(true){
         Network::ping++;
-        if(Network::ping > 10){
+        if(Network::ping > 5){
             GameManager::PlayerDisconnect(pl);
             break;
         }
