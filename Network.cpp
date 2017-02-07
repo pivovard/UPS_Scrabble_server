@@ -110,7 +110,12 @@ void Network::PlayerListen(Player *pl)
         }
 
         cout << "Recv from " << pl->id << pl->nick << ": " << msg << endl;
-        Resolve(msg , pl);
+        try{
+            Resolve(msg , pl);
+        } catch(...){
+            cout << "Message not resolved." << endl;
+            pl->SendToPlayer("ERR:0\n");
+        }
     }
 
     if(size == 0)
@@ -126,7 +131,7 @@ void Network::PlayerListen(Player *pl)
     try {
         GameManager::PlayerDisconnect(pl); //uz muze byt nullptr pokud END
     }
-    catch(exception e) {};
+    catch(...) {};
 }
 
 void Network::Resolve(string msg, Player *pl)
@@ -140,7 +145,11 @@ void Network::Resolve(string msg, Player *pl)
     }
 
     if(strcmp(type.c_str(), "TURN") == 0){
-        GameManager::ResolveTurn(msg, pl);
+        try {
+            GameManager::ResolveTurn(msg, pl);
+        } catch (...){
+            pl->SendToPlayer("TURNERR\n");
+        }
     }
     else if(strcmp(type.c_str(), "NICK") == 0){
         i = msg.find(';');
