@@ -109,7 +109,7 @@ void Network::PlayerListen(Player *pl)
             continue;
         }
 
-        cout << "Recv from " << pl->id << pl->nick << ": " << msg << endl;
+        cout << "Recv from " << pl->id << " " << pl->nick << ": " << msg << endl;
         try{
             Resolve(msg , pl);
         } catch(...){
