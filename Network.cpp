@@ -140,26 +140,35 @@ void Network::Resolve(string msg, Player *pl)
     }
 
     if(strcmp(type.c_str(), "TURN") == 0){
-        GameManager::ResolveTurn(msg);
+        GameManager::ResolveTurn(msg, pl);
     }
     else if(strcmp(type.c_str(), "NICK") == 0){
         i = msg.find(';');
-        pl->n = stoi(msg.substr(i+1));
+        int n = atoi(msg.substr(i+1).c_str());
+        if(n < 2 || n > 4){
+            send(pl->socket, "NICKERR:CHAR\n", msg_length, 0);
+            close(pl->socket);
+            return;
+        }
+
+        pl->n = n; // stoi(msg.substr(i+1));
         pl->nick = msg.substr(0, i);
 
         int res = GameManager::CheckNick(pl->nick, pl->n);
         //existujici nick
         if(res == 2){
-            send(client_sock, "NICK\n", msg_length, 0);
+            send(pl->socket, "NICKERR:USE\n", msg_length, 0);
+            close(pl->socket);
             return;
         }
         //odpojeny klient
         if(res == 1){
             char *m = new char[msg_length];
-            send(client_sock, "RETURN\n", msg_length, 0);
+            send(pl->socket, "RETURN\n", msg_length, 0);
         }
         //volny nick
         if(res == 0){
+            send(pl->socket, "NICKOK\n", msg_length, 0);
             GameManager::PlayerConnect(pl);
         }
     }
@@ -189,7 +198,7 @@ void Network::Resolve(string msg, Player *pl)
 
 void Network::PlayerPing(Player * pl)
 {
-    while(true && pl->connected == 0){
+    while(pl->connected == 0){
         pl->ping++;
         if(pl->ping > 5){
             GameManager::PlayerDisconnect(pl);
