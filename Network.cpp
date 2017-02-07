@@ -7,6 +7,7 @@
 
 int Network::socket_desc , Network::client_sock , Network::c;
 struct sockaddr_in Network::server , Network::client;
+int Network::PORT = 1993;
 
 void Network::Start()
 {
@@ -38,7 +39,7 @@ void Network::Start()
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons( PORT );
+    server.sin_port = htons( Network::PORT );
 
     //Bind
     if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
@@ -176,10 +177,12 @@ void Network::Resolve(string msg, Player *pl)
     }
     else if(strcmp(type.c_str(), "PING") == 0){
         pl->ping--;
+        pl->SendToPlayer("PING\n");
         return;
     }
     else {
         cout << "Message not resolved, client killed!" << endl;
+        close(pl->socket);
         GameManager::PlayerDisconnect(pl);
     }
 }
