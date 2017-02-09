@@ -198,6 +198,10 @@ void Network::Resolve(string msg, Player *pl)
         pl->SendToPlayer("PING\n");
         return;
     }
+    else if(strcmp(type.c_str(), "ERR") == 0){
+        cout << "Error: " << msg << endl;
+        return;
+    }
     else {
         cout << "Message not resolved, client killed!" << endl;
         close(pl->socket);
