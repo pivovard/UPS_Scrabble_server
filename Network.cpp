@@ -155,7 +155,7 @@ void Network::Resolve(string msg, Player *pl)
         i = msg.find(';');
         int n = atoi(msg.substr(i+1).c_str());
         if(n < 2 || n > 4){
-            send(pl->socket, "NICKERR:CHAR\n", msg_length, 0);
+            pl->SendToPlayer("NICKERR:CHAR\n");
             close(pl->socket);
             return;
         }
@@ -166,18 +166,18 @@ void Network::Resolve(string msg, Player *pl)
         int res = GameManager::CheckNick(pl->nick, pl->n);
         //existujici nick
         if(res == 2){
-            send(pl->socket, "NICKERR:USE\n", msg_length, 0);
+            pl->SendToPlayer("NICKERR:USE\n");
             close(pl->socket);
             return;
         }
         //odpojeny klient
         if(res == 1){
             char *m = new char[msg_length];
-            send(pl->socket, "RETURN\n", msg_length, 0);
+            pl->SendToPlayer("RETURN\n");
         }
         //volny nick
         if(res == 0){
-            send(pl->socket, "NICKOK\n", msg_length, 0);
+            pl->SendToPlayer("NICKOK\n");
             GameManager::PlayerConnect(pl);
         }
     }
